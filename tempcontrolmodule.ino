@@ -129,7 +129,8 @@ void loop() {
   long now = millis();
   if (now - lastMsg > 5000) {
     lastMsg = now;
-    
+//     int DI[DI_total], DI_prev[DI_total], DO[DO_total];
+// unsigned int DI_counter[DI_total];
 //  String DI_topic = device_name + "/view/DI";
 //       String DO_topic = device_name + "/view/DO";
 //       String AI_topic = device_name + "/view/AI";
