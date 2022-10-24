@@ -3,7 +3,7 @@
 #include <PubSubClient.h>
 #include <Wire.h>
 #include "max6675.h"
-
+#include <SPI.h>
 
 // const char* ssid = "KEI123";
 // const char* password = "4qe%T#.QL+9=8$r";
@@ -37,13 +37,16 @@ long lastMsg = 0;
 char msg[50];
 char temp1[50];
 
-//SPI Init
+//SPI Bus 1 Init(VSPI)
 int CLK = 18;
 int SO = 19;
-//Temp Init
 int CS1 = 5;
-// int CS2 = ;
-// int CS3 = ;
+// int CS2 = 17;
+// int CS3 = 16;
+//SPI Bus 2 Init(HSPI)
+// int CLK = 14;
+// int SO = 12;
+// int CS1 = 15;
 // int CS4 = ;
 // int CS5 = ;
 // int CS6 = ;
@@ -56,7 +59,7 @@ MAX6675 temp_sensor1(CLK, CS1, SO);
 // MAX6675 temp_sensor6(CLK, CS6, MISO);
 
 // LED Pin
-const int ledPin = 14;
+const int ledPin[2] = {14,27};
 //Temp Reading
 // float temp_raw;
 // float Temp_Mapped[];
@@ -72,7 +75,13 @@ void setup()
     client.setServer(mqtt_server, 1883);
     client.setCallback(callback);
 
-    pinMode(ledPin, OUTPUT);
+    for (uint8_t i = 0; i <= 1; i++)
+    {
+        pinMode(ledPin[i],OUTPUT);
+    }
+    
+
+    // pinMode(ledPin, OUTPUT);
     delay(500);
 }
 
@@ -118,12 +127,14 @@ void callback(char *topic, byte *message, unsigned int length)
         if (messageTemp == "on")
         {
             Serial.println("on");
-            digitalWrite(ledPin, HIGH);
+            digitalWrite(ledPin[0], HIGH);
+            digitalWrite(ledPin[1], HIGH);
         }
         else if (messageTemp == "off")
         {
             Serial.println("off");
-            digitalWrite(ledPin, LOW);
+            digitalWrite(ledPin[0], LOW);
+            digitalWrite(ledPin[1], LOW);
         }
     }
 }
@@ -140,6 +151,12 @@ void reconnect()
             Serial.println("connected");
             // Subscribe
             client.subscribe("esp32/output");
+            client.subscribe("esp32/st1");
+            client.subscribe("esp32/st2");
+            client.subscribe("esp32/st3");
+            client.subscribe("esp32/st4");
+            client.subscribe("esp32/st5");
+            client.subscribe("esp32/st6");
         }
         else
         {
@@ -165,13 +182,13 @@ void loop()
     if (now - lastMsg > 5000)
     {
         // temperature = module.readCelsius()+10; //why add 10??
-        float temperature1 = temp_sensor1.readCelsius()+10; //why add 10??
+        float temperature1 = temp_sensor1.readCelsius();
         dtostrf(temperature1, 4, 2, temp1);
         lastMsg = now;
       
       
         // String Test_json = "[{\"temp1\": "+temp1+"}]";
-        String Test_json2 = "[{temp123: " + String(temp1) + "}]";
+        String Test_json2 = "[{\"temp1\": " + String(temp1) + "},{\"temp2\": " + String(temp1) + "}]";
         // String Temp_json = "[ { \"temp\": " + Temp_Mapped[0] + " }, { \"temp\": " + Temp_Mapped[1] + " }, { \"temp\": " + Temp_Mapped[2] + " }, { \"temp\": " + Temp_Mapped[3] + " }, { \"temp\": " + Temp_Mapped[4] + "}, { \"temp\": " + Temp_Mapped[5] + " } ]";
 
         client.publish("esp32/temperature", Test_json2.c_str());
