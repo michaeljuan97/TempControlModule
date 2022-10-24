@@ -188,7 +188,7 @@ void loop()
       
       
         // String Test_json = "[{\"temp1\": "+temp1+"}]";
-        String Test_json2 = "[{\"temp1\": " + String(temp1) + "},{\"temp2\": " + String(temp1) + "}]";
+        String Test_json2 = "[{\"temp1\": " + String(temp1) + "},{\"temp2\": " + String(temp1) + "},{\"temp3\": " + String(temp1) + "},{\"temp4\": " + String(temp1) + "},{\"temp5\": " + String(temp1) + "},{\"temp6\": " + String(temp1) + "}]";
         // String Temp_json = "[ { \"temp\": " + Temp_Mapped[0] + " }, { \"temp\": " + Temp_Mapped[1] + " }, { \"temp\": " + Temp_Mapped[2] + " }, { \"temp\": " + Temp_Mapped[3] + " }, { \"temp\": " + Temp_Mapped[4] + "}, { \"temp\": " + Temp_Mapped[5] + " } ]";
 
         client.publish("esp32/temperature", Test_json2.c_str());
