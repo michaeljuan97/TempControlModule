@@ -182,6 +182,7 @@ void loop()
     if (now - lastMsg > 5000)
     {
         // temperature = module.readCelsius()+10; //why add 10??
+        // float temperaturexyz = module.readCelsius()+(Int)calibrate_1; //why add 10??
         float temperature1 = temp_sensor1.readCelsius();
         dtostrf(temperature1, 4, 2, temp1);
         lastMsg = now;
