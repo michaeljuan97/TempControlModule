@@ -1,0 +1,1531 @@
+[
+    {
+        "id": "ddbbf6bb42548c8f",
+        "type": "tab",
+        "label": "Temp. Control",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1d53151d5a4aa609",
+        "type": "mqtt in",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "topic": "esp32/temperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "9f529cf8a2175817",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "84fd4563aa07d2ed"
+            ]
+        ]
+    },
+    {
+        "id": "84fd4563aa07d2ed",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "DB Insert",
+        "func": "let temp1=msg.payload[0].temp1;\nlet temp2=msg.payload[1].temp2;\nlet temp3=msg.payload[2].temp3;\nlet temp4=msg.payload[3].temp4;\nlet temp5=msg.payload[4].temp5;\nlet temp6=msg.payload[5].temp6;\nflow.set(\"temp1\", msg.payload[0].temp1);\nflow.set(\"temp2\", msg.payload[1].temp2);\nflow.set(\"temp3\", msg.payload[2].temp3);\nflow.set(\"temp4\", msg.payload[3].temp4);\nflow.set(\"temp5\", msg.payload[4].temp5);\nflow.set(\"temp6\", msg.payload[5].temp6);\nmsg.topic = \"insert into tempControlDevice (temp1,temp2,temp3,temp4,temp5,temp6) \\\nvalues ('\" + temp1 + \"',\" + temp2 + \",\" + temp3 + \",\" + temp4 + \",\" + temp5 + \",\" + temp6 + \")\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "8c35a6a9a283b62f"
+            ]
+        ]
+    },
+    {
+        "id": "b9685a780f81ead7",
+        "type": "mqtt out",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Machine Command",
+        "topic": "",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 550,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e80889e0a179da37",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St. 1 State",
+        "func": "msg.topic = \"esp32/st1\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st1Stat\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st1Stat\", \"OFF\");\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "b9685a780f81ead7"
+            ]
+        ]
+    },
+    {
+        "id": "69899816d075fe64",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St. 2 State",
+        "func": "msg.topic = \"esp32/st2\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st2Stat\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st2Stat\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 340,
+        "wires": [
+            [
+                "b9685a780f81ead7"
+            ]
+        ]
+    },
+    {
+        "id": "34285c10d0dc5488",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St. 3 State",
+        "func": "msg.topic = \"esp32/st3\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st3Stat\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st3Stat\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 380,
+        "wires": [
+            [
+                "b9685a780f81ead7"
+            ]
+        ]
+    },
+    {
+        "id": "711cd53522545b14",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St. 4 State",
+        "func": "msg.topic = \"esp32/st4\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st4Stat\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st4Stat\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 420,
+        "wires": [
+            [
+                "b9685a780f81ead7"
+            ]
+        ]
+    },
+    {
+        "id": "68a6724cc97bc880",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St. 5 State",
+        "func": "msg.topic = \"esp32/st5\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st5Stat\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st5Stat\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 460,
+        "wires": [
+            [
+                "b9685a780f81ead7"
+            ]
+        ]
+    },
+    {
+        "id": "eb9229c4f8244ad2",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St. 6 State",
+        "func": "msg.topic = \"esp32/st6\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st6Stat\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st6Stat\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 500,
+        "wires": [
+            [
+                "b9685a780f81ead7"
+            ]
+        ]
+    },
+    {
+        "id": "9ac674f273996a1d",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Monitor State - Digital Temp Control",
+        "func": "if (flow.get(\"st1Stat\") == \"ON\" || flow.get(\"st2Stat\") == \"ON\" ||\n    flow.get(\"st3Stat\") == \"ON\" || flow.get(\"st4Stat\") == \"ON\" ||\n    flow.get(\"st5Stat\") == \"ON\" || flow.get(\"st6Stat\") == \"ON\" ){\n    // msg.payload = \"NYALA WOI\"\n    msg.payload = \"OFF\"\n    msg.topic = \"esp32/digitalTempControl\"\n\n    return msg;\n} else {\n    // msg.payload = \"MATI WOOIOIOOIO\";\n    msg.payload = \"ON\"\n    msg.topic = \"esp32/digitalTempControl\";\n    return msg\n    }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 60,
+        "wires": [
+            [
+                "3a014da0dcf61b2e"
+            ]
+        ]
+    },
+    {
+        "id": "58c5e92e345f6aed",
+        "type": "inject",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Loop 1s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 800,
+        "y": 80,
+        "wires": [
+            [
+                "647a883338b09ed8",
+                "d426eb9c95074b77",
+                "92b9a784673bf729",
+                "5dc5594f3a2802f4",
+                "f7d0dadb5e01b541",
+                "b6f4783e19bca840"
+            ]
+        ]
+    },
+    {
+        "id": "3a014da0dcf61b2e",
+        "type": "mqtt out",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Machine Command",
+        "topic": "",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 1310,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "647a883338b09ed8",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St1 Monitor Temp",
+        "func": "// Heater 1\nif (flow.get(\"st1Stat\") == \"ON\")\n{\n    if (flow.get(\"temp1\") >= flow.get(\"st1Max\") && flow.get(\"st1\") == \"ON\" ) {\n    msg.payload = \"OFF\"\n    msg.topic = \"esp32/st1\"\n    flow.set(\"st1\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp1\") <= flow.get(\"st1Min\") || flow.get(\"temp1\") <= flow.get(\"st1Max\")) && (flow.get(\"st1\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"esp32/st1\"\n    flow.set(\"st1\", \"ON\");\n    return msg;\n\n}\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 120,
+        "wires": [
+            [
+                "3a014da0dcf61b2e"
+            ]
+        ]
+    },
+    {
+        "id": "d813ace3a24ea284",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "function 3",
+        "func": "flow.set(\"DUMMY_TEMP\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 494,
+        "y": 1456,
+        "wires": [
+            [
+                "3ee83f0415800a76"
+            ]
+        ]
+    },
+    {
+        "id": "d426eb9c95074b77",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St2 Monitor Temp",
+        "func": "if (flow.get(\"st2Stat\") == \"ON\")\n{\n    if (flow.get(\"temp2\") >= flow.get(\"st2Max\") && flow.get(\"st2\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"esp32/st2\"\n    flow.set(\"st2\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp2\") <= flow.get(\"st2Min\") || flow.get(\"temp2\") <= flow.get(\"st2Max\")) && (flow.get(\"st2\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"esp32/st2\"\n    flow.set(\"st2\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 160,
+        "wires": [
+            [
+                "3a014da0dcf61b2e"
+            ]
+        ]
+    },
+    {
+        "id": "6cbdeab740dc187d",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Monitor Stat - Safety",
+        "func": "if (flow.get(\"st1Stat\") == \"OFF\" && flow.get(\"st1\") == \"ON\") {\n    msg.topic = \"esp32/st1\"\n    msg.payload = \"OFF\"\n    flow.set(\"st1\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st2Stat\") == \"OFF\" && flow.get(\"st2\") == \"ON\")\n{\n    msg.topic = \"esp32/st2\"\n    msg.payload = \"OFF\"\n    flow.set(\"st2\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st3Stat\") == \"OFF\" && flow.get(\"st3\") == \"ON\") {\n    msg.topic = \"esp32/st3\"\n    msg.payload = \"OFF\"\n    flow.set(\"st3\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st4Stat\") == \"OFF\" && flow.get(\"st4\") == \"ON\") {\n    msg.topic = \"esp32/st4\"\n    msg.payload = \"OFF\"\n    flow.set(\"st4\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st5Stat\") == \"OFF\" && flow.get(\"st5\") == \"ON\") {\n    msg.topic = \"esp32/st5\"\n    msg.payload = \"OFF\"\n    flow.set(\"st5\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st6Stat\") == \"OFF\" && flow.get(\"st6\") == \"ON\") {\n    msg.topic = \"esp32/st6\"\n    msg.payload = \"OFF\"\n    flow.set(\"st6\", \"OFF\");\n\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "59b0363b5d4652c7"
+            ]
+        ]
+    },
+    {
+        "id": "83f924b452775bb9",
+        "type": "inject",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "6cbdeab740dc187d"
+            ]
+        ]
+    },
+    {
+        "id": "59b0363b5d4652c7",
+        "type": "mqtt out",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Machine Command",
+        "topic": "",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 450,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0c785d0f9250b80d",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"st1Max\", msg.payload.maxTemp1);\nflow.set(\"st1Min\", msg.payload.minTemp1);\nflow.set(\"calibration1\", msg.payload.calibration1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 339,
+        "y": 601,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "35a8a1322847c614",
+        "type": "mqtt out",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "topic": "esp32/calibtest",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 1220,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "8c35a6a9a283b62f",
+        "type": "delay",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Delete Later",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 60,
+        "wires": [
+            [
+                "34317140a0d3bd7f"
+            ]
+        ]
+    },
+    {
+        "id": "83adde52411e653a",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration2\", msg.payload.calibration2);\nflow.set(\"st2Max\", msg.payload.maxTemp2);\nflow.set(\"st2Min\", msg.payload.minTemp2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 359,
+        "y": 721,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ac72e20cdd914a6a",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration3\", msg.payload.calibration3);\nflow.set(\"st3Max\", msg.payload.maxTemp3);\nflow.set(\"st3Min\", msg.payload.minTemp3);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 339,
+        "y": 881,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f6def7da0f8c5fdf",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration6\", msg.payload.calibration6);\nflow.set(\"st6Max\", msg.payload.maxTemp6);\nflow.set(\"st6Min\", msg.payload.minTemp6);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 959,
+        "y": 881,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "00f0b96ef334faae",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration5\", msg.payload.calibration5);\nflow.set(\"st5Min\", msg.payload.minTemp5);\nflow.set(\"st5Max\", msg.payload.maxTemp5);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 939,
+        "y": 741,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "813495ea3393b5bc",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration4\", msg.payload.calibration4);\nflow.set(\"st4Max\", msg.payload.maxTemp4);\nflow.set(\"st4Min\", msg.payload.minTemp4);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 939,
+        "y": 601,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "92b9a784673bf729",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St3 Monitor Temp",
+        "func": "if (flow.get(\"st3Stat\") == \"ON\")\n{\nif (flow.get(\"temp3\") >= flow.get(\"st3Max\") && flow.get(\"st3\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"esp32/st3\"\n    flow.set(\"st3\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp3\") <= flow.get(\"st3Min\") || flow.get(\"temp3\") <= flow.get(\"st3Max\")) && (flow.get(\"st3\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"esp32/st3\"\n    flow.set(\"st3\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 200,
+        "wires": [
+            [
+                "3a014da0dcf61b2e"
+            ]
+        ]
+    },
+    {
+        "id": "5dc5594f3a2802f4",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St4 Monitor Temp",
+        "func": "if (flow.get(\"st4Stat\") == \"ON\")\n{\nif (flow.get(\"temp4\") >= flow.get(\"st4Max\") && flow.get(\"st4\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"esp32/st4\"\n    flow.set(\"st4\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp4\") <= flow.get(\"st4Min\") || flow.get(\"temp4\") <= flow.get(\"st4Max\")) && (flow.get(\"st4\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"esp32/st4\"\n    flow.set(\"st4\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 240,
+        "wires": [
+            [
+                "3a014da0dcf61b2e"
+            ]
+        ]
+    },
+    {
+        "id": "b6f4783e19bca840",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St5 Monitor Temp",
+        "func": "if (flow.get(\"st5Stat\") == \"ON\")\n{\nif (flow.get(\"temp5\") >= flow.get(\"st5Max\") && flow.get(\"st5\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"esp32/st5\"\n    flow.set(\"st5\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp5\") <= flow.get(\"st5Min\") || flow.get(\"temp5\") <= flow.get(\"st5Max\")) && (flow.get(\"st5\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"esp32/st5\"\n    flow.set(\"st5\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 280,
+        "wires": [
+            [
+                "3a014da0dcf61b2e"
+            ]
+        ]
+    },
+    {
+        "id": "f7d0dadb5e01b541",
+        "type": "function",
+        "z": "ddbbf6bb42548c8f",
+        "name": "St6 Monitor Temp",
+        "func": "if (flow.get(\"st6Stat\") == \"ON\")\n{\nif (flow.get(\"temp6\") >= flow.get(\"st6Max\") && flow.get(\"st6\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"esp32/st6\"\n    flow.set(\"st6\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp6\") <= flow.get(\"st6Min\") || flow.get(\"temp6\") <= flow.get(\"st6Max\")) && (flow.get(\"st6\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"esp32/st6\"\n    flow.set(\"st6\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 320,
+        "wires": [
+            [
+                "3a014da0dcf61b2e"
+            ]
+        ]
+    },
+    {
+        "id": "bb490924e5b8565d",
+        "type": "ui_switch",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "label": "Heater 1",
+        "tooltip": "Control Temp 1",
+        "group": "357ad3e381ca0a52",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-stop",
+        "oncolor": "red",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-play",
+        "offcolor": "green",
+        "animate": true,
+        "className": "",
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "e80889e0a179da37"
+            ]
+        ]
+    },
+    {
+        "id": "cbd04e173bd2f470",
+        "type": "ui_switch",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "label": "Heater 2",
+        "tooltip": "Control Temp 2",
+        "group": "04accf189f335271",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-stop",
+        "oncolor": "red",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-play",
+        "offcolor": "green",
+        "animate": true,
+        "className": "",
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "69899816d075fe64"
+            ]
+        ]
+    },
+    {
+        "id": "2a402c03f9623b3d",
+        "type": "ui_switch",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "label": "Heater 3",
+        "tooltip": "Control Temp 3",
+        "group": "5533b603824c0959",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-stop",
+        "oncolor": "red",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-play",
+        "offcolor": "green",
+        "animate": true,
+        "className": "",
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "34285c10d0dc5488"
+            ]
+        ]
+    },
+    {
+        "id": "36b31d06db9bc1da",
+        "type": "ui_switch",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "label": "Heater 4",
+        "tooltip": "Control Temp 4",
+        "group": "357ad3e381ca0a52",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-stop",
+        "oncolor": "red",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-play",
+        "offcolor": "green",
+        "animate": true,
+        "className": "",
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "711cd53522545b14"
+            ]
+        ]
+    },
+    {
+        "id": "eaaf70948ae6f670",
+        "type": "ui_switch",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "label": "Heater 5",
+        "tooltip": "Control Temp 5",
+        "group": "04accf189f335271",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-stop",
+        "oncolor": "red",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-play",
+        "offcolor": "green",
+        "animate": true,
+        "className": "",
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "68a6724cc97bc880"
+            ]
+        ]
+    },
+    {
+        "id": "f97484a53a61f25b",
+        "type": "ui_switch",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "label": "Heater 6",
+        "tooltip": "Control Temp 6",
+        "group": "5533b603824c0959",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-stop",
+        "oncolor": "red",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-play",
+        "offcolor": "green",
+        "animate": true,
+        "className": "",
+        "x": 140,
+        "y": 500,
+        "wires": [
+            [
+                "eb9229c4f8244ad2"
+            ]
+        ]
+    },
+    {
+        "id": "0c6260bf078f1a5b",
+        "type": "ui_slider",
+        "z": "ddbbf6bb42548c8f",
+        "name": "",
+        "label": "DUMMY TEMP",
+        "tooltip": "",
+        "group": "04accf189f335271",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "900",
+        "step": 1,
+        "className": "",
+        "x": 314,
+        "y": 1456,
+        "wires": [
+            [
+                "d813ace3a24ea284"
+            ]
+        ]
+    },
+    {
+        "id": "7b479c509dd9c61b",
+        "type": "ui_form",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Form Inputan Heater 3",
+        "label": "Configure Heater 3",
+        "group": "5533b603824c0959",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Min. Temp",
+                "value": "minTemp3",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Max. Temp",
+                "value": "maxTemp3",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Calibration",
+                "value": "calibration3",
+                "type": "number",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "minTemp3": "",
+            "maxTemp3": "",
+            "calibration3": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 109,
+        "y": 921,
+        "wires": [
+            [
+                "6a16ab9da74d9529",
+                "16b58081b84c8f89",
+                "ac72e20cdd914a6a",
+                "35a8a1322847c614"
+            ]
+        ]
+    },
+    {
+        "id": "b23fa9b76e9aa71c",
+        "type": "ui_form",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Form Inputan Heater 6",
+        "label": "Configure Heater 6",
+        "group": "5533b603824c0959",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Min. Temp",
+                "value": "minTemp6",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Max. Temp",
+                "value": "maxTemp6",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Calibration",
+                "value": "calibration6",
+                "type": "number",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "minTemp6": "",
+            "maxTemp6": "",
+            "calibration6": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 729,
+        "y": 921,
+        "wires": [
+            [
+                "ffa43df1a4cd6289",
+                "01d1f9725ca29e65",
+                "f6def7da0f8c5fdf",
+                "35a8a1322847c614"
+            ]
+        ]
+    },
+    {
+        "id": "c79822dfbdad737e",
+        "type": "ui_form",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Form Inputan Heater 2",
+        "label": "Configure Heater 2",
+        "group": "04accf189f335271",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Min. Temp",
+                "value": "minTemp2",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Max. Temp",
+                "value": "maxTemp2",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Calibration",
+                "value": "calibration2",
+                "type": "number",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "minTemp2": "",
+            "maxTemp2": "",
+            "calibration2": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 129,
+        "y": 741,
+        "wires": [
+            [
+                "074483d237c9798c",
+                "ac57351294ceb169",
+                "83adde52411e653a",
+                "35a8a1322847c614"
+            ]
+        ]
+    },
+    {
+        "id": "24f1d124ebc6cb19",
+        "type": "ui_form",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Form Inputan Heater 4",
+        "label": "Configure Heater 4",
+        "group": "357ad3e381ca0a52",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Min. Temp",
+                "value": "minTemp4",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Max. Temp",
+                "value": "maxTemp4",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Calibration",
+                "value": "calibration4",
+                "type": "number",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "minTemp4": "",
+            "maxTemp4": "",
+            "calibration4": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 709,
+        "y": 641,
+        "wires": [
+            [
+                "16a68097a719e1ca",
+                "7ad31b2dfcdb7c11",
+                "813495ea3393b5bc",
+                "35a8a1322847c614"
+            ]
+        ]
+    },
+    {
+        "id": "e0169467139a542d",
+        "type": "ui_form",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Form Inputan Heater 5",
+        "label": "Configure Heater 5",
+        "group": "04accf189f335271",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Min. Temp",
+                "value": "minTemp5",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Max. Temp",
+                "value": "maxTemp5",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Calibration",
+                "value": "calibration5",
+                "type": "text",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "minTemp5": "",
+            "maxTemp5": "",
+            "calibration5": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 709,
+        "y": 781,
+        "wires": [
+            [
+                "5efb497d1c476786",
+                "2f6217cb9813e70e",
+                "00f0b96ef334faae",
+                "35a8a1322847c614"
+            ]
+        ]
+    },
+    {
+        "id": "6ef5c8842e32e5e8",
+        "type": "ui_form",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Form Inputan Heater 1",
+        "label": "Configure Heater 1",
+        "group": "357ad3e381ca0a52",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Min. Temp",
+                "value": "minTemp1",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Max. Temp",
+                "value": "maxTemp1",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Calibration",
+                "value": "calibration1",
+                "type": "number",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "minTemp1": "",
+            "maxTemp1": "",
+            "calibration1": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 120,
+        "y": 640,
+        "wires": [
+            [
+                "6e5c6be4b1e481db",
+                "6fe5b3aaaba64bd4",
+                "0c785d0f9250b80d",
+                "35a8a1322847c614"
+            ]
+        ]
+    },
+    {
+        "id": "3ee83f0415800a76",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "04accf189f335271",
+        "order": 11,
+        "width": "0",
+        "height": "0",
+        "name": "DUMMY TEMP",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 694,
+        "y": 1476,
+        "wires": []
+    },
+    {
+        "id": "6a16ab9da74d9529",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "5533b603824c0959",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "name": "St3 Max Temp",
+        "label": "Max. Temp",
+        "format": "{{msg.payload.maxTemp3}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 329,
+        "y": 921,
+        "wires": []
+    },
+    {
+        "id": "16b58081b84c8f89",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "5533b603824c0959",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "name": "St3 Min Temp",
+        "label": "Min. Temp",
+        "format": "{{msg.payload.minTemp3}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 329,
+        "y": 961,
+        "wires": []
+    },
+    {
+        "id": "ffa43df1a4cd6289",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "5533b603824c0959",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "St6 Max Temp",
+        "label": "Max. Temp",
+        "format": "{{msg.payload.maxTemp6}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 949,
+        "y": 921,
+        "wires": []
+    },
+    {
+        "id": "01d1f9725ca29e65",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "5533b603824c0959",
+        "order": 8,
+        "width": "3",
+        "height": "1",
+        "name": "St6 Min Temp",
+        "label": "Min. Temp",
+        "format": "{{msg.payload.minTemp6}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 949,
+        "y": 961,
+        "wires": []
+    },
+    {
+        "id": "074483d237c9798c",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "04accf189f335271",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "name": "St2 Max Temp",
+        "label": "Max. Temp",
+        "format": "{{msg.payload.maxTemp2}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 349,
+        "y": 761,
+        "wires": []
+    },
+    {
+        "id": "ac57351294ceb169",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "04accf189f335271",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "name": "St2 Min Temp",
+        "label": "Min. Temp",
+        "format": "{{msg.payload.minTemp2}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 349,
+        "y": 801,
+        "wires": []
+    },
+    {
+        "id": "16a68097a719e1ca",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "357ad3e381ca0a52",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "St4 Max Temp",
+        "label": "Max. Temp",
+        "format": "{{msg.payload.maxTemp4}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 929,
+        "y": 641,
+        "wires": []
+    },
+    {
+        "id": "7ad31b2dfcdb7c11",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "357ad3e381ca0a52",
+        "order": 8,
+        "width": "3",
+        "height": "1",
+        "name": "St4 Min Temp",
+        "label": "Min. Temp",
+        "format": "{{msg.payload.minTemp4}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 929,
+        "y": 681,
+        "wires": []
+    },
+    {
+        "id": "5efb497d1c476786",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "04accf189f335271",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "St5 Max Temp",
+        "label": "Max. Temp",
+        "format": "{{msg.payload.maxTemp5}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 929,
+        "y": 781,
+        "wires": []
+    },
+    {
+        "id": "2f6217cb9813e70e",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "04accf189f335271",
+        "order": 8,
+        "width": "3",
+        "height": "1",
+        "name": "St5 Min Temp",
+        "label": "Min. Temp",
+        "format": "{{msg.payload.minTemp5}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 929,
+        "y": 821,
+        "wires": []
+    },
+    {
+        "id": "6e5c6be4b1e481db",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "357ad3e381ca0a52",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "name": "St1 Max Temp",
+        "label": "Max. Temp",
+        "format": "{{msg.payload.maxTemp1}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 340,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "6fe5b3aaaba64bd4",
+        "type": "ui_text",
+        "z": "ddbbf6bb42548c8f",
+        "group": "357ad3e381ca0a52",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "name": "St1 Min Temp",
+        "label": "Min. Temp",
+        "format": "{{msg.payload.minTemp1}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 340,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "34317140a0d3bd7f",
+        "type": "mysql",
+        "z": "ddbbf6bb42548c8f",
+        "mydb": "20ce7e720d3a27f2",
+        "name": "",
+        "x": 610,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c3f5c282ace099d1",
+        "type": "inject",
+        "z": "ddbbf6bb42548c8f",
+        "name": "Loop 10s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 810,
+        "y": 40,
+        "wires": [
+            [
+                "9ac674f273996a1d"
+            ]
+        ]
+    },
+    {
+        "id": "75f9da8db9cc7cd0",
+        "type": "ui_spacer",
+        "z": "ddbbf6bb42548c8f",
+        "name": "spacer",
+        "group": "357ad3e381ca0a52",
+        "order": 5,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "14124969deccd946",
+        "type": "ui_spacer",
+        "z": "ddbbf6bb42548c8f",
+        "name": "spacer",
+        "group": "04accf189f335271",
+        "order": 5,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "d0d00cf3b0aa15b0",
+        "type": "ui_spacer",
+        "z": "ddbbf6bb42548c8f",
+        "name": "spacer",
+        "group": "5533b603824c0959",
+        "order": 5,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "9f529cf8a2175817",
+        "type": "mqtt-broker",
+        "name": "Test Broker",
+        "broker": "utilitydemo.colinn.id",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "357ad3e381ca0a52",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "da58e239018d3645",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "04accf189f335271",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "da58e239018d3645",
+        "order": 2,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "5533b603824c0959",
+        "type": "ui_group",
+        "name": "Group 3",
+        "tab": "da58e239018d3645",
+        "order": 3,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "20ce7e720d3a27f2",
+        "type": "MySQLdatabase",
+        "name": "Sensbey_TempLog",
+        "host": "host.docker.internal",
+        "port": "3306",
+        "db": "sensbey",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "da58e239018d3645",
+        "type": "ui_tab",
+        "name": "SENSBEY IOT",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
