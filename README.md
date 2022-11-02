@@ -12,14 +12,14 @@ Monitor 6 temperature sensors using MAX6675 modules, split into 2 SPI Buses
         Heater 4 : 4 
         Heater 5 : 2
         Heater 6 : 15
-- SPI 1, 3 sensors:
+- SPI 1, 3 sensors (SAME CLK & SO PIN):
 
         CLK : 18
         SO : 19
         CS1 : 5
         CS2 : 17
         CS3 : 16
-- SPI 2, 3 sensors:
+- SPI 2, 3 sensors (SAME H_CLK & H_SO PIN):
 
         H_CLK : 14
         H_SO : 12
