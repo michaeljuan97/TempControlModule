@@ -26,3 +26,4 @@ Monitor 6 temperature sensors using MAX6675 modules, split into 2 SPI Buses
         CS4 : 27
         CS5 : 26
         CS6 : 25
+##### _See wiring schematic for wiring_
