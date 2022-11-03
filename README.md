@@ -87,6 +87,7 @@ Verify you can start docker withot sudo
 docker run hello-world
 ```
 ### Download and Run Sensbey-Nodered
+**This will download, install and configure nodered and the flows**
 ```sh
 docker run -itd -p 1880:1880 --name Sensbey-Nodered michaeljuan97/sensbey_temp-monitoring
 ```
