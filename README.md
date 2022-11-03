@@ -93,10 +93,10 @@ docker run -itd -p 1880:1880 --name Sensbey-Nodered michaeljuan97/sensbey_temp-m
 
 ## Configuration
 Make sure you can access Nodered (port 1880) and Grafana (port 3000)
---- Nodered
-- Configure MQTT Broker, Topic, and MYSQL server
+- Nodered
+    1.  Configure MQTT Broker, Topic, and MYSQL server
 
---- Grafana
-- Login with your username and password
-- Import Grafana Dashboard JSON
-- Edit Control Panel, change with IP address of Nodered
+- Grafana
+    1. Login with your username and password
+    2. Import Grafana Dashboard JSON
+    3. Edit Control Panel, change with IP address of Nodered
