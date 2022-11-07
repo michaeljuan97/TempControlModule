@@ -4,7 +4,7 @@ Simple IOT Module to control 6 heaters (Relays) based on ESP32
 Monitor 6 temperature sensors using MAX6675 modules, split into 2 SPI Buses
 
 ### GPIO Pins
-- Digital Out: 
+- Heater (ESP2): 
 
         Heater 1 = 23
         Heater 2 = 22
@@ -12,14 +12,23 @@ Monitor 6 temperature sensors using MAX6675 modules, split into 2 SPI Buses
         Heater 4 = 4 
         Heater 5 = 2
         Heater 6 = 15
-- SPI 1, 3 sensors:
+
+- Digital Temp Module (ESP2): 
+
+        DigTemp 1 = 32
+        Heater 2 = 33
+        Heater 3 = 25
+        Heater 4 = 26
+        Heater 5 = 27
+        Heater 6 = 14
+- SPI 1, 3 sensors (ESP1):
 
         CLK = 18
         SO = 19
         CS1 = 5
         CS2 = 17
         CS3 = 16
-- SPI 2, 3 sensors:
+- SPI 2, 3 sensors (ESP1):
 
         H_CLK = 14
         H_SO = 12
