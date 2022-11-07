@@ -85,70 +85,138 @@ void callback(char *topic, byte *message, unsigned int length)
     }
     Serial.println();
 
+    //Heater
     if (String(topic) == "sensbey/st1")
     {
         if (messageTemp == "ON")
         {
-            digitalWrite(ledPin[0], HIGH);
+            digitalWrite(HeaterPin[0], HIGH);
         }
         else if (messageTemp == "OFF")
         {
-            digitalWrite(ledPin[0], LOW);
+            digitalWrite(HeaterPin[0], LOW);
         }
     }
     if (String(topic) == "sensbey/st2")
     {
         if (messageTemp == "ON")
         {
-            digitalWrite(ledPin[1], HIGH);
+            digitalWrite(HeaterPin[1], HIGH);
         }
         else if (messageTemp == "OFF")
         {
-            digitalWrite(ledPin[1], LOW);
+            digitalWrite(HeaterPin[1], LOW);
         }
     }
     if (String(topic) == "sensbey/st3")
     {
         if (messageTemp == "ON")
         {
-            digitalWrite(ledPin[2], HIGH);
+            digitalWrite(HeaterPin[2], HIGH);
         }
         else if (messageTemp == "OFF")
         {
-            digitalWrite(ledPin[2], LOW);
+            digitalWrite(HeaterPin[2], LOW);
         }
     }
     if (String(topic) == "sensbey/st4")
     {
         if (messageTemp == "ON")
         {
-            digitalWrite(ledPin[3], HIGH);
+            digitalWrite(HeaterPin[3], HIGH);
         }
         else if (messageTemp == "OFF")
         {
-            digitalWrite(ledPin[3], LOW);
+            digitalWrite(HeaterPin[3], LOW);
         }
     }
     if (String(topic) == "sensbey/st5")
     {
         if (messageTemp == "ON")
         {
-            digitalWrite(ledPin[4], HIGH);
+            digitalWrite(HeaterPin[4], HIGH);
         }
         else if (messageTemp == "OFF")
         {
-            digitalWrite(ledPin[4], LOW);
+            digitalWrite(HeaterPin[4], LOW);
         }
     }
     if (String(topic) == "sensbey/st6")
     {
         if (messageTemp == "ON")
         {
-            digitalWrite(ledPin[5], HIGH);
+            digitalWrite(HeaterPin[5], HIGH);
         }
         else if (messageTemp == "OFF")
         {
-            digitalWrite(ledPin[5], LOW);
+            digitalWrite(HeaterPin[5], LOW);
+        }
+    }
+    //Temp control module
+    if (String(topic) == "sensbey/digitalTempControl1")
+    {
+        if (messageTemp == "ON")
+        {
+            digitalWrite(TempControlPin[0], HIGH);
+        }
+        else if (messageTemp == "OFF")
+        {
+            digitalWrite(TempControlPin[0], LOW);
+        }
+    }
+    if (String(topic) == "sensbey/digitalTempControl2")
+    {
+        if (messageTemp == "ON")
+        {
+            digitalWrite(TempControlPin[1], HIGH);
+        }
+        else if (messageTemp == "OFF")
+        {
+            digitalWrite(TempControlPin[1], LOW);
+        }
+    }
+    if (String(topic) == "sensbey/digitalTempControl3")
+    {
+        if (messageTemp == "ON")
+        {
+            digitalWrite(TempControlPin[2], HIGH);
+        }
+        else if (messageTemp == "OFF")
+        {
+            digitalWrite(TempControlPin[2], LOW);
+        }
+    }
+    if (String(topic) == "sensbey/digitalTempControl4")
+    {
+        if (messageTemp == "ON")
+        {
+            digitalWrite(TempControlPin[3], HIGH);
+        }
+        else if (messageTemp == "OFF")
+        {
+            digitalWrite(TempControlPin[3], LOW);
+        }
+    }
+    if (String(topic) == "sensbey/digitalTempControl5")
+    {
+        if (messageTemp == "ON")
+        {
+            digitalWrite(TempControlPin[4], HIGH);
+        }
+        else if (messageTemp == "OFF")
+        {
+            digitalWrite(TempControlPin[4], LOW);
+        }
+    }
+    if (String(topic) == "sensbey/digitalTempControl6")
+    {
+        if (messageTemp == "ON")
+        {
+            digitalWrite(TempControlPin[5], HIGH);
+        }
+        else if (messageTemp == "OFF")
+        {
+            digitalWrite(TempControlPin[5], LOW);
         }
     }
 }
