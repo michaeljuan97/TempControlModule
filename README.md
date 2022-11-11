@@ -4,31 +4,22 @@ Simple IOT Module to control 6 heaters (Relays) based on ESP32
 Monitor 6 temperature sensors using MAX6675 modules, split into 2 SPI Buses
 
 ### GPIO Pins
-- Heater (ESP2): 
+- Digital Out: 
 
-        Heater 1 = 23
-        Heater 2 = 22
-        Heater 3 = 21
-        Heater 4 = 4 
-        Heater 5 = 2
-        Heater 6 = 15
-
-- Digital Temp Module (ESP2): 
-
-        DigTemp 1 = 32
-        Heater 2 = 33
-        Heater 3 = 25
-        Heater 4 = 26
-        Heater 5 = 27
-        Heater 6 = 14
-- SPI 1, 3 sensors (ESP1):
+        Heater 1 : 23
+        Heater 2 : 22
+        Heater 3 : 21
+        Heater 4 : 4 
+        Heater 5 : 2
+        Heater 6 : 15
+- SPI 1, 3 sensors:
 
         CLK = 18
         SO = 19
         CS1 = 5
         CS2 = 17
         CS3 = 16
-- SPI 2, 3 sensors (ESP1):
+- SPI 2, 3 sensors:
 
         H_CLK = 14
         H_SO = 12
@@ -39,41 +30,11 @@ Monitor 6 temperature sensors using MAX6675 modules, split into 2 SPI Buses
 ## Installation
 
 Please install prerequisite 
-- Grafana, >= 8.5.4
-- MySQL (Or use existing MySQL Server)
-- MQTT Broker (Or use existing MQTT Broker)
 - Docker
-
-### Grafana Installation
-```sh
-sudo apt update
-sudo apt install -y adduser libfontconfig1
-wget https://dl.grafana.com/enterprise/release/grafana-enterprise-rpi_8.5.11_armhf.deb
-sudo dpkg -i grafana-enterprise-rpi_8.5.11_armhf.deb
-```
-
-open <IP_ADDRESS>:3000 on your browser
-default username/password : admin/admin
-Feel free to change default password at this step, make sure not to lose the new password
-
-
-### MySQL Installation
-```sh
-sudo apt install mariadb-server
-```
-Run the following command to begin the MySQL securing process.
-
-```sh
-sudo mysql_secure_installation
-```
-Just follow the prompts to set a password for the root user and to secure your MySQL installation.
-For a more secure installation, you should answer “Y” to all prompts when asked to answer “Y” or “N“.
-**Make sure you write down the password you set during this process!**
-
-### MQTT Installation
-Follow installation steps on this [PAGE]
-
-[PAGE]: <https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-raspberry-pi/>
+- Grafana
+- MySQL
+- MQTT Broker
+- Grafana
 
 ### Docker (Raspbian)
 Uninstall older version Docker is installed
@@ -95,6 +56,26 @@ Verify you can start docker withot sudo
 ```sh
 docker run hello-world
 ```
+### Grafana Installation
+```sh
+docker run -itd --name=grafana -p 3000:3000 grafana/grafana-oss
+```
+
+```sh
+open <IP_ADDRESS>:3000 on your browser
+default username/password : admin/admin
+```
+
+### MySQL Installation
+```sh
+docker run --name mysql-server -e MYSQL_ROOT_PASSWORD=yourpasswordhere mysql
+```
+**Change 'yourpasswordhere' with your desired password!**
+### MQTT Installation
+Follow installation steps on this [PAGE]
+
+[PAGE]: <https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-raspberry-pi/>
+
 ### Download and Run Sensbey-Nodered
 **This will download, install and configure nodered and the flows**
 ```sh
