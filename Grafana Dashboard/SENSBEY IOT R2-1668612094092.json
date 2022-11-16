@@ -1,0 +1,667 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_SENSBEY",
+      "label": "Sensbey",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "mysql",
+      "pluginName": "MySQL"
+    }
+  ],
+  "__elements": [],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "8.5.10"
+    },
+    {
+      "type": "datasource",
+      "id": "mysql",
+      "name": "MySQL",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Export Data",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://google.com"
+    }
+  ],
+  "liveNow": true,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "panels": [],
+      "title": "ステータスパネル",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_SENSBEY}"
+      },
+      "description": "Dashboard",
+      "gridPos": {
+        "h": 22,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 13,
+      "options": {
+        "content": "<iframe src=\"http://192.168.11.124:1880/ui/#!/2?socketid=zR0qurN5Sow2FDeOAAAB\" title=\"W3Schools Free Online Web Tutorials\" width=\"100%\" height=\"100%\" scrolling=\"no\" style=\"overflow:hidden\"></iframe>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "8.5.10",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_SENSBEY}"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  updated_at AS \"time\",\n  id\nFROM milesight\nWHERE\n  $__timeFilter(updated_at)\nORDER BY updated_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "milesight",
+          "timeColumn": "updated_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "ダッシュボード",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_SENSBEY}"
+      },
+      "description": "Heater Temp Log",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.11",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_SENSBEY}"
+          },
+          "format": "time_series",
+          "group": [
+            {
+              "params": [
+                "$__interval",
+                "none"
+              ],
+              "type": "time"
+            }
+          ],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  $__timeGroupAlias(ts,$__interval),\n  temp1 AS \"ヒーター 1\",\n  temp2 AS \"ヒーター 2\",\n  temp3 AS \"ヒーター 3\",\n  temp4 AS \"ヒーター 4\",\n  temp5 AS \"ヒーター 5\",\n  temp6 AS \"ヒーター 6\"\nFROM tempControlDevice\nWHERE\n  $__timeFilter(ts)\nGROUP BY 1\nORDER BY $__timeGroup(ts,$__interval)",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "temp1"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "ヒーター 1"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "temp2"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "ヒーター 2"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "temp3"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "ヒーター 3"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "temp4"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "ヒーター 4"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "temp5"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "ヒーター 5"
+                ],
+                "type": "alias"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "temp6"
+                ],
+                "type": "column"
+              },
+              {
+                "params": [
+                  "ヒーター 6"
+                ],
+                "type": "alias"
+              }
+            ]
+          ],
+          "table": "tempControlDevice",
+          "timeColumn": "ts",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "温度データ",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 10,
+      "panels": [],
+      "title": "コントロールパネル",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_SENSBEY}"
+      },
+      "gridPos": {
+        "h": 22,
+        "w": 21,
+        "x": 0,
+        "y": 33
+      },
+      "id": 5,
+      "options": {
+        "content": "<iframe src=\"http://192.168.11.124:1880/ui/#!/0?socketid=zR0qurN5Sow2FDeOAAAB\" title=\"W3Schools Free Online Web Tutorials\" width=\"100%\" height=\"100%\" scrolling=\"no\" style=\"overflow:hidden\"></iframe>\n",
+        "mode": "html"
+      },
+      "pluginVersion": "8.5.10",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_SENSBEY}"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  updated_at AS \"time\",\n  id\nFROM milesight\nWHERE\n  $__timeFilter(updated_at)\nORDER BY updated_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "milesight",
+          "timeColumn": "updated_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "コントロールパネル",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_SENSBEY}"
+      },
+      "description": "Calibration",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow"
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 22,
+        "w": 3,
+        "x": 21,
+        "y": 33
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.10",
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_SENSBEY}"
+          },
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT cast(calibration1 as float) as \"センサー 1\"\nFROM currentConfig",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "calibration1"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "currentConfig",
+          "timeColumn": "updated_at",
+          "timeColumnType": "timestamp",
+          "where": []
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_SENSBEY}"
+          },
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT cast(calibration2 as float) as \"センサー 2\"\nFROM currentConfig",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "calibration1"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "currentConfig",
+          "timeColumn": "updated_at",
+          "timeColumnType": "timestamp",
+          "where": []
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_SENSBEY}"
+          },
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT cast(calibration3 as float) as \"センサー3\"\nFROM currentConfig",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "calibration1"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "currentConfig",
+          "timeColumn": "updated_at",
+          "timeColumnType": "timestamp",
+          "where": []
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_SENSBEY}"
+          },
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT cast(calibration4 as float) as \"センサー 4\"\nFROM currentConfig",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "calibration1"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "currentConfig",
+          "timeColumn": "updated_at",
+          "timeColumnType": "timestamp",
+          "where": []
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_SENSBEY}"
+          },
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT cast(calibration5 as float) as \"センサー5\"\nFROM currentConfig",
+          "refId": "E",
+          "select": [
+            [
+              {
+                "params": [
+                  "calibration1"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "currentConfig",
+          "timeColumn": "updated_at",
+          "timeColumnType": "timestamp",
+          "where": []
+        },
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_SENSBEY}"
+          },
+          "format": "table",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT cast(calibration6 as float) as \"センサー 6\"\nFROM currentConfig",
+          "refId": "F",
+          "select": [
+            [
+              {
+                "params": [
+                  "calibration1"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "currentConfig",
+          "timeColumn": "updated_at",
+          "timeColumnType": "timestamp",
+          "where": []
+        }
+      ],
+      "title": "温度校正",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "stat"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1s",
+      "2s",
+      "5s",
+      "10s"
+    ]
+  },
+  "timezone": "",
+  "title": "SENSBEY IOT R2",
+  "uid": "sKT2MZigz",
+  "version": 5,
+  "weekStart": ""
+}

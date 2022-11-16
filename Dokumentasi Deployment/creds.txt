@@ -1,0 +1,16 @@
+Username dan Password
+SENSBEY IOT
+Deployment 12 November 2022
+
+Nodered
+admin/adminsensebey
+
+Grafana
+admin/adminsensebey
+
+MySQL
+root/adminsensebey (LOCAL ONLY)
+grafana/grafana
+
+MQTT
+admin/adminsensebey

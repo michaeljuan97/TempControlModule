@@ -31,7 +31,7 @@ long lastMsg = 0;
 char msg[50];
 char temp1[50],temp2[50],temp3[50],temp4[50],temp5[50],temp6[50];
 
-int calibrate1, calibrate2, calibrate3, calibrate4, calibrate5, calibrate6;
+float calibrate1, calibrate2, calibrate3, calibrate4, calibrate5, calibrate6;
 // SPI Bus 1 Init (Max 3 sensor di 1 bus)
 int CLK = 18;
 int SO = 19;
