@@ -186,7 +186,7 @@ void loop()
     client.loop();
 
     long now = millis();
-    if (now - lastMsg > 5000)
+    if (now - lastMsg > 250)
     {
         float temperature1 = temp_sensor1.readCelsius()+calibrate1;
         float temperature2 = temp_sensor2.readCelsius()+calibrate2;

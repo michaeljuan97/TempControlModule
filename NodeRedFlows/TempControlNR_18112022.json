@@ -1,0 +1,3303 @@
+[
+    {
+        "id": "7dc4a225aa06a383",
+        "type": "tab",
+        "label": "Temp. Control1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "545463041d38d8bd",
+        "type": "mqtt in",
+        "z": "7dc4a225aa06a383",
+        "name": "",
+        "topic": "sensbey/temperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "9f529cf8a2175817",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 60,
+        "wires": [
+            [
+                "2b2dfda3293dad68"
+            ]
+        ]
+    },
+    {
+        "id": "2b2dfda3293dad68",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "DB Insert",
+        "func": "let temp1=msg.payload[0].temp1;\nlet temp2=msg.payload[1].temp2;\nlet temp3=msg.payload[2].temp3;\nlet temp4=msg.payload[3].temp4;\nlet temp5=msg.payload[4].temp5;\nlet temp6=msg.payload[5].temp6;\nflow.set(\"temp1\", msg.payload[0].temp1);\nflow.set(\"temp2\", msg.payload[1].temp2);\nflow.set(\"temp3\", msg.payload[2].temp3);\nflow.set(\"temp4\", msg.payload[3].temp4);\nflow.set(\"temp5\", msg.payload[4].temp5);\nflow.set(\"temp6\", msg.payload[5].temp6);\nmsg.topic = \"insert into tempControlDevice (temp1,temp2,temp3,temp4,temp5,temp6) \\\nvalues ('\" + temp1 + \"',\" + temp2 + \",\" + temp3 + \",\" + temp4 + \",\" + temp5 + \",\" + temp6 + \")\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "ef605f4e9194549f"
+            ]
+        ]
+    },
+    {
+        "id": "e75ddfcab36b9147",
+        "type": "mqtt out",
+        "z": "7dc4a225aa06a383",
+        "name": "Machine Command",
+        "topic": "",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 550,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "6d76c3c954a77b7c",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St. 1 State",
+        "func": "msg.topic = \"sensbey/st1\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st1Stat\", \"ON\");\n    flow.set(\"st1\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st1Stat\", \"OFF\");\n    flow.set(\"st1\", \"OFF\");\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "e75ddfcab36b9147",
+                "fe611189b37a0d49"
+            ]
+        ]
+    },
+    {
+        "id": "c1214803f98feb2c",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St. 2 State",
+        "func": "msg.topic = \"sensbey/st2\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st2Stat\", \"ON\");\n    flow.set(\"st2\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st2Stat\", \"OFF\");\n    flow.set(\"st2\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 360,
+        "wires": [
+            [
+                "e75ddfcab36b9147",
+                "b0fe227038c15b52"
+            ]
+        ]
+    },
+    {
+        "id": "c8c20bd91d1f2f99",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St. 3 State",
+        "func": "msg.topic = \"sensbey/st3\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st3Stat\", \"ON\");\n    flow.set(\"st3\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st3Stat\", \"OFF\");\n    flow.set(\"st3\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 440,
+        "wires": [
+            [
+                "e75ddfcab36b9147",
+                "e283c9aa4317fd23"
+            ]
+        ]
+    },
+    {
+        "id": "7837ad687f3c8d49",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St. 4 State",
+        "func": "msg.topic = \"sensbey/st4\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st4Stat\", \"ON\");\n    flow.set(\"st4\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st4Stat\", \"OFF\");\n    flow.set(\"st4\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 520,
+        "wires": [
+            [
+                "e75ddfcab36b9147",
+                "b38d6d5e82a0d04e"
+            ]
+        ]
+    },
+    {
+        "id": "d459f65a66dbbdb0",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St. 5 State",
+        "func": "msg.topic = \"sensbey/st5\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st5Stat\", \"ON\");\n    flow.set(\"st5\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st5Stat\", \"OFF\");\n    flow.set(\"st5\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 600,
+        "wires": [
+            [
+                "e75ddfcab36b9147",
+                "684f7be174ead2d0"
+            ]
+        ]
+    },
+    {
+        "id": "9ab3783c73c705f6",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St. 6 State",
+        "func": "msg.topic = \"sensbey/st6\"\nif (msg.payload == true ) {\n    msg.payload = \"ON\"\n    flow.set(\"st6Stat\", \"ON\");\n    flow.set(\"st6\", \"ON\");\n    return msg;\n} else if (msg.payload == false) {\n    msg.payload = \"OFF\"\n    flow.set(\"st6Stat\", \"OFF\");\n    flow.set(\"st6\", \"OFF\");\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 680,
+        "wires": [
+            [
+                "e75ddfcab36b9147",
+                "4f20cb6d711fd8cc"
+            ]
+        ]
+    },
+    {
+        "id": "c292ad8347d3190e",
+        "type": "inject",
+        "z": "7dc4a225aa06a383",
+        "name": "Loop 1s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 800,
+        "y": 80,
+        "wires": [
+            [
+                "b0d8b2cffd5c7167",
+                "e538cbf93e3a4d3d",
+                "11dfa2f747c4270f",
+                "2b0f98ebba8be3cc",
+                "2b2f898b137b2bdb",
+                "623193f683bd7521"
+            ]
+        ]
+    },
+    {
+        "id": "dd5507576a9aa775",
+        "type": "mqtt out",
+        "z": "7dc4a225aa06a383",
+        "name": "Machine Command",
+        "topic": "",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 1310,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b0d8b2cffd5c7167",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St1 Monitor Temp",
+        "func": "// Heater 1\nif (flow.get(\"st1Stat\") == \"ON\")\n{\n    if (flow.get(\"temp1\") >= flow.get(\"st1Max\") && flow.get(\"st1\") == \"ON\" ) {\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/st1\"\n    flow.set(\"st1\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp1\") <= flow.get(\"st1Min\") || flow.get(\"temp1\") <= flow.get(\"st1Max\")) && (flow.get(\"st1\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/st1\"\n    flow.set(\"st1\", \"ON\");\n    return msg;\n\n}\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 120,
+        "wires": [
+            [
+                "dd5507576a9aa775"
+            ]
+        ]
+    },
+    {
+        "id": "e538cbf93e3a4d3d",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St2 Monitor Temp",
+        "func": "if (flow.get(\"st2Stat\") == \"ON\")\n{\n    if (flow.get(\"temp2\") >= flow.get(\"st2Max\") && flow.get(\"st2\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/st2\"\n    flow.set(\"st2\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp2\") <= flow.get(\"st2Min\") || flow.get(\"temp2\") <= flow.get(\"st2Max\")) && (flow.get(\"st2\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/st2\"\n    flow.set(\"st2\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 160,
+        "wires": [
+            [
+                "dd5507576a9aa775"
+            ]
+        ]
+    },
+    {
+        "id": "99f0fc4eabeb3df7",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Monitor Stat - Safety",
+        "func": "if (flow.get(\"st1Stat\") == \"OFF\" && flow.get(\"st1\") == \"ON\") {\n    msg.topic = \"esp32/st1\"\n    msg.payload = \"OFF\"\n    flow.set(\"st1\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st2Stat\") == \"OFF\" && flow.get(\"st2\") == \"ON\")\n{\n    msg.topic = \"esp32/st2\"\n    msg.payload = \"OFF\"\n    flow.set(\"st2\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st3Stat\") == \"OFF\" && flow.get(\"st3\") == \"ON\") {\n    msg.topic = \"esp32/st3\"\n    msg.payload = \"OFF\"\n    flow.set(\"st3\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st4Stat\") == \"OFF\" && flow.get(\"st4\") == \"ON\") {\n    msg.topic = \"esp32/st4\"\n    msg.payload = \"OFF\"\n    flow.set(\"st4\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st5Stat\") == \"OFF\" && flow.get(\"st5\") == \"ON\") {\n    msg.topic = \"esp32/st5\"\n    msg.payload = \"OFF\"\n    flow.set(\"st5\", \"OFF\");\n\n    return msg;\n}\nif (flow.get(\"st6Stat\") == \"OFF\" && flow.get(\"st6\") == \"ON\") {\n    msg.topic = \"esp32/st6\"\n    msg.payload = \"OFF\"\n    flow.set(\"st6\", \"OFF\");\n\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "1b666a6512360d09"
+            ]
+        ]
+    },
+    {
+        "id": "a358bf371a8abf55",
+        "type": "inject",
+        "z": "7dc4a225aa06a383",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "99f0fc4eabeb3df7"
+            ]
+        ]
+    },
+    {
+        "id": "1b666a6512360d09",
+        "type": "mqtt out",
+        "z": "7dc4a225aa06a383",
+        "name": "Machine Command",
+        "topic": "",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 450,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0b22f174a878f4de",
+        "type": "mqtt out",
+        "z": "7dc4a225aa06a383",
+        "name": "",
+        "topic": "sensbey/calibtest",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 1230,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "11dfa2f747c4270f",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St3 Monitor Temp",
+        "func": "if (flow.get(\"st3Stat\") == \"ON\")\n{\nif (flow.get(\"temp3\") >= flow.get(\"st3Max\") && flow.get(\"st3\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/st3\"\n    flow.set(\"st3\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp3\") <= flow.get(\"st3Min\") || flow.get(\"temp3\") <= flow.get(\"st3Max\")) && (flow.get(\"st3\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/st3\"\n    flow.set(\"st3\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 200,
+        "wires": [
+            [
+                "dd5507576a9aa775"
+            ]
+        ]
+    },
+    {
+        "id": "2b0f98ebba8be3cc",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St4 Monitor Temp",
+        "func": "if (flow.get(\"st4Stat\") == \"ON\")\n{\nif (flow.get(\"temp4\") >= flow.get(\"st4Max\") && flow.get(\"st4\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/st4\"\n    flow.set(\"st4\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp4\") <= flow.get(\"st4Min\") || flow.get(\"temp4\") <= flow.get(\"st4Max\")) && (flow.get(\"st4\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/st4\"\n    flow.set(\"st4\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 240,
+        "wires": [
+            [
+                "dd5507576a9aa775"
+            ]
+        ]
+    },
+    {
+        "id": "623193f683bd7521",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St5 Monitor Temp",
+        "func": "if (flow.get(\"st5Stat\") == \"ON\")\n{\nif (flow.get(\"temp5\") >= flow.get(\"st5Max\") && flow.get(\"st5\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/st5\"\n    flow.set(\"st5\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp5\") <= flow.get(\"st5Min\") || flow.get(\"temp5\") <= flow.get(\"st5Max\")) && (flow.get(\"st5\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/st5\"\n    flow.set(\"st5\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 280,
+        "wires": [
+            [
+                "dd5507576a9aa775"
+            ]
+        ]
+    },
+    {
+        "id": "2b2f898b137b2bdb",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "St6 Monitor Temp",
+        "func": "if (flow.get(\"st6Stat\") == \"ON\")\n{\nif (flow.get(\"temp6\") >= flow.get(\"st6Max\") && flow.get(\"st6\") == \"ON\") {\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/st6\"\n    flow.set(\"st6\", \"OFF\");\n    return msg;\n\n}\n    if ((flow.get(\"temp6\") <= flow.get(\"st6Min\") || flow.get(\"temp6\") <= flow.get(\"st6Max\")) && (flow.get(\"st6\") == \"OFF\")) {\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/st6\"\n    flow.set(\"st6\", \"ON\");\n    return msg;\n\n}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 320,
+        "wires": [
+            [
+                "dd5507576a9aa775"
+            ]
+        ]
+    },
+    {
+        "id": "51869d3a1a61bd5b",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Form Inputan Heater 3",
+        "label": "ヒーター設定 3",
+        "group": "5533b603824c0959",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "設定温度以上",
+                "value": "maxTemp3",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "設定温度以下",
+                "value": "minTemp3",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "maxTemp3": "",
+            "minTemp3": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 109,
+        "y": 1241,
+        "wires": [
+            [
+                "940a45adab412714",
+                "69214c3f5d1cd848",
+                "0b22f174a878f4de",
+                "6e18814e1dcd0158"
+            ]
+        ]
+    },
+    {
+        "id": "84adaaa5ddd54887",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Form Inputan Heater 6",
+        "label": "ヒーター設定 6",
+        "group": "5533b603824c0959",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "設定温度以上",
+                "value": "maxTemp6",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "設定温度以下",
+                "value": "minTemp6",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "maxTemp6": "",
+            "minTemp6": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 729,
+        "y": 1241,
+        "wires": [
+            [
+                "ad573cc8564201b7",
+                "f4b66b7fd68aaa1a",
+                "0b22f174a878f4de",
+                "338a338532fbf961"
+            ]
+        ]
+    },
+    {
+        "id": "37aeddab99be8f2a",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Form Inputan Heater 2",
+        "label": "ヒーター設定 2",
+        "group": "04accf189f335271",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "設定温度以上",
+                "value": "maxTemp2",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "設定温度以下",
+                "value": "minTemp2",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "maxTemp2": "",
+            "minTemp2": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 129,
+        "y": 1061,
+        "wires": [
+            [
+                "4324eaa23f35718b",
+                "6e28ee598274155e",
+                "0b22f174a878f4de",
+                "8224c0770f86d85c"
+            ]
+        ]
+    },
+    {
+        "id": "739a1d15faf1fcb2",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Form Inputan Heater 4",
+        "label": "ヒーター設定 4",
+        "group": "357ad3e381ca0a52",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "設定温度以上",
+                "value": "maxTemp4",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "設定温度以下",
+                "value": "minTemp4",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "maxTemp4": "",
+            "minTemp4": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 709,
+        "y": 961,
+        "wires": [
+            [
+                "9b6f0c21c1a6893a",
+                "8631b7d466118fc8",
+                "0b22f174a878f4de",
+                "11e429139bdf090e"
+            ]
+        ]
+    },
+    {
+        "id": "304d8561af9fe3e3",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Form Inputan Heater 5",
+        "label": "ヒーター設定 5",
+        "group": "04accf189f335271",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "設定温度以上",
+                "value": "maxTemp5",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "設定温度以下",
+                "value": "minTemp5",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "maxTemp5": "",
+            "minTemp5": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 709,
+        "y": 1101,
+        "wires": [
+            [
+                "0474c26ef3b28cfb",
+                "da3ac2be1ec775c5",
+                "0b22f174a878f4de",
+                "d187bcb569e0b384"
+            ]
+        ]
+    },
+    {
+        "id": "82e119fbfe62fed8",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Form Inputan Heater 1",
+        "label": "ヒーター設定 1",
+        "group": "357ad3e381ca0a52",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "設定温度以上",
+                "value": "maxTemp1",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "設定温度以下",
+                "value": "minTemp1",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "maxTemp1": "",
+            "minTemp1": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 120,
+        "y": 960,
+        "wires": [
+            [
+                "b9bbf94b38a1e187",
+                "a09af8abb7c46cea",
+                "0b22f174a878f4de",
+                "887e26f7a7895096"
+            ]
+        ]
+    },
+    {
+        "id": "940a45adab412714",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "5533b603824c0959",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "name": "St3 Max Temp",
+        "label": "設定温度以上",
+        "format": "{{msg.payload.maxTemp3}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 329,
+        "y": 1241,
+        "wires": []
+    },
+    {
+        "id": "69214c3f5d1cd848",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "5533b603824c0959",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "name": "St3 Min Temp",
+        "label": "設定温度以下",
+        "format": "{{msg.payload.minTemp3}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 329,
+        "y": 1281,
+        "wires": []
+    },
+    {
+        "id": "ad573cc8564201b7",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "5533b603824c0959",
+        "order": 9,
+        "width": "3",
+        "height": "1",
+        "name": "St6 Max Temp",
+        "label": "設定温度以上",
+        "format": "{{msg.payload.maxTemp6}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 949,
+        "y": 1241,
+        "wires": []
+    },
+    {
+        "id": "f4b66b7fd68aaa1a",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "5533b603824c0959",
+        "order": 10,
+        "width": "3",
+        "height": "1",
+        "name": "St6 Min Temp",
+        "label": "設定温度以下",
+        "format": "{{msg.payload.minTemp6}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 949,
+        "y": 1281,
+        "wires": []
+    },
+    {
+        "id": "4324eaa23f35718b",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "04accf189f335271",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "name": "St2 Max Temp",
+        "label": "設定温度以上",
+        "format": "{{msg.payload.maxTemp2}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 349,
+        "y": 1081,
+        "wires": []
+    },
+    {
+        "id": "6e28ee598274155e",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "04accf189f335271",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "name": "St2 Min Temp",
+        "label": "設定温度以下",
+        "format": "{{msg.payload.minTemp2}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 349,
+        "y": 1121,
+        "wires": []
+    },
+    {
+        "id": "9b6f0c21c1a6893a",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "357ad3e381ca0a52",
+        "order": 9,
+        "width": "3",
+        "height": "1",
+        "name": "St4 Max Temp",
+        "label": "設定温度以上",
+        "format": "{{msg.payload.maxTemp4}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 929,
+        "y": 961,
+        "wires": []
+    },
+    {
+        "id": "8631b7d466118fc8",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "357ad3e381ca0a52",
+        "order": 10,
+        "width": "3",
+        "height": "1",
+        "name": "St4 Min Temp",
+        "label": "設定温度以下",
+        "format": "{{msg.payload.minTemp4}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 929,
+        "y": 1001,
+        "wires": []
+    },
+    {
+        "id": "0474c26ef3b28cfb",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "04accf189f335271",
+        "order": 9,
+        "width": "3",
+        "height": "1",
+        "name": "St5 Max Temp",
+        "label": "設定温度以上",
+        "format": "{{msg.payload.maxTemp5}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 929,
+        "y": 1101,
+        "wires": []
+    },
+    {
+        "id": "da3ac2be1ec775c5",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "04accf189f335271",
+        "order": 10,
+        "width": "3",
+        "height": "1",
+        "name": "St5 Min Temp",
+        "label": "設定温度以下",
+        "format": "{{msg.payload.minTemp5}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 929,
+        "y": 1141,
+        "wires": []
+    },
+    {
+        "id": "b9bbf94b38a1e187",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "357ad3e381ca0a52",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "name": "St1 Max Temp",
+        "label": "設定温度以上",
+        "format": "{{msg.payload.maxTemp1}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 340,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "a09af8abb7c46cea",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "357ad3e381ca0a52",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "name": "St1 Min Temp",
+        "label": "設定温度以下",
+        "format": "{{msg.payload.minTemp1}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 340,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "4806048a90c70a45",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "SaveConfig",
+        "func": "let st1 = flow.get(\"st1\")\nlet st2 = flow.get(\"st2\")\nlet st3 = flow.get(\"st3\")\nlet st4 = flow.get(\"st4\")\nlet st5 = flow.get(\"st5\")\nlet st6 = flow.get(\"st6\")\nlet calibration1 = flow.get(\"calibration1\")\nlet calibration2 = flow.get(\"calibration2\")\nlet calibration3 = flow.get(\"calibration3\")\nlet calibration4 = flow.get(\"calibration4\")\nlet calibration5 = flow.get(\"calibration5\")\nlet calibration6 = flow.get(\"calibration6\")\nlet st1min = flow.get(\"st1Min\")\nlet st2min = flow.get(\"st2Min\")\nlet st3min = flow.get(\"st3Min\")\nlet st4min = flow.get(\"st4Min\")\nlet st5min = flow.get(\"st5Min\")\nlet st6min = flow.get(\"st6Min\")\nlet st1max = flow.get(\"st1Max\")\nlet st2max = flow.get(\"st2Max\")\nlet st3max = flow.get(\"st3Max\")\nlet st4max = flow.get(\"st4Max\")\nlet st5max = flow.get(\"st5Max\")\nlet st6max = flow.get(\"st6Max\")\n\nmsg.topic =\"update currentConfig \\\nset st1 = '\"+ st1 + \"',st2 = '\" + st2 + \"',st3 = '\" + st3 + \"',st4='\" + st4 + \"',st5='\" + st5 + \"',st6='\" + st6 +\"', \\\ncalibration1 = '\" + calibration1 + \"',calibration2='\" + calibration2 + \"',calibration3='\" + calibration3 + \"',calibration4='\" + calibration4 + \"',calibration5='\" + calibration5 + \"',calibration6='\" + calibration6 + \"', \\\nst1min = '\" + st1min + \"', st2min='\" + st2min + \"',st3min= '\" + st3min + \"',st4min='\" + st4min + \"',st5min='\" + st5min + \"',st6min = '\" + st6min + \"', \\\nst1max= '\" + st1max + \"',st2max='\" + st2max + \"',st3max='\" + st3max + \"',st4max='\" + st4max + \"',st5max='\" + st5max + \"',st6max='\" + st6max + \"'  \"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 380,
+        "wires": [
+            [
+                "d12391dbfa2fa0cd"
+            ]
+        ]
+    },
+    {
+        "id": "3a9bf346b0e08cfd",
+        "type": "inject",
+        "z": "7dc4a225aa06a383",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 850,
+        "y": 380,
+        "wires": [
+            [
+                "4806048a90c70a45"
+            ]
+        ]
+    },
+    {
+        "id": "547e7d3686b5388a",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn ON Heater 1",
+        "group": "357ad3e381ca0a52",
+        "order": 4,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "6d76c3c954a77b7c"
+            ]
+        ]
+    },
+    {
+        "id": "54f49341765fed85",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn OFF heater 1",
+        "group": "357ad3e381ca0a52",
+        "order": 5,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "6d76c3c954a77b7c"
+            ]
+        ]
+    },
+    {
+        "id": "5361d99edd02bad7",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Show Calibration Menu",
+        "group": "4e9ce00bc81d3815",
+        "order": 1,
+        "width": "18",
+        "height": "1",
+        "passthru": false,
+        "label": "温度校正",
+        "tooltip": "Show Menu",
+        "color": "",
+        "bgcolor": "yellow",
+        "className": "",
+        "icon": "",
+        "payload": "暗証番号入力して下さい",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 850,
+        "y": 1360,
+        "wires": [
+            [
+                "72624a8c94f7206f"
+            ]
+        ]
+    },
+    {
+        "id": "72624a8c94f7206f",
+        "type": "ui_toast",
+        "z": "7dc4a225aa06a383",
+        "position": "prompt",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": false,
+        "outputs": 1,
+        "ok": "入力",
+        "cancel": "キャンセル",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 830,
+        "y": 1400,
+        "wires": [
+            [
+                "5fb08d8250fcd002"
+            ]
+        ]
+    },
+    {
+        "id": "fd7a507b9cf51d1c",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor 1",
+        "label": "温度読調整 1",
+        "group": "2f3cf93878c09d49",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "温度読調整",
+                "value": "calibration1",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "calibration1": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 150,
+        "y": 1420,
+        "wires": [
+            [
+                "b974a4d62b2f5ab1"
+            ]
+        ]
+    },
+    {
+        "id": "d41a84ff1654466c",
+        "type": "comment",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Page",
+        "info": "",
+        "x": 140,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "67cc1538c39a1b7e",
+        "type": "ui_ui_control",
+        "z": "7dc4a225aa06a383",
+        "name": "",
+        "events": "all",
+        "x": 1300,
+        "y": 1400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5fb08d8250fcd002",
+        "type": "switch",
+        "z": "7dc4a225aa06a383",
+        "name": "Check PIN",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "7981",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 990,
+        "y": 1400,
+        "wires": [
+            [
+                "c471b6079dcf2f8c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "9945b55028a2b727",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Hide Calibration Menu",
+        "group": "da01e2b69ce1f8e9",
+        "order": 1,
+        "width": "18",
+        "height": "1",
+        "passthru": false,
+        "label": "温度読調整",
+        "tooltip": "Hide Menu",
+        "color": "",
+        "bgcolor": "yellow",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tabs\":{\"hide\":[\"調整\"]}}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 840,
+        "y": 1460,
+        "wires": [
+            [
+                "4499c60b946efada"
+            ]
+        ]
+    },
+    {
+        "id": "4499c60b946efada",
+        "type": "ui_ui_control",
+        "z": "7dc4a225aa06a383",
+        "name": "",
+        "events": "all",
+        "x": 1280,
+        "y": 1460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c471b6079dcf2f8c",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "function 1",
+        "func": "msg.payload = { \"tabs\": { \"show\": [\"調整\"] } }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 1400,
+        "wires": [
+            [
+                "67cc1538c39a1b7e"
+            ]
+        ]
+    },
+    {
+        "id": "b974a4d62b2f5ab1",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration1\", msg.payload.calibration1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1420,
+        "wires": [
+            [
+                "5781ba3916d7388b"
+            ]
+        ]
+    },
+    {
+        "id": "7208d750cb3ef733",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor 2",
+        "label": "温度読調整 2",
+        "group": "42da17ba8f24bbcb",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "温度読調整",
+                "value": "calibration2",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "calibration2": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 150,
+        "y": 1460,
+        "wires": [
+            [
+                "9b7de271e9d3b255"
+            ]
+        ]
+    },
+    {
+        "id": "9b7de271e9d3b255",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration2\", msg.payload.calibration2);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1460,
+        "wires": [
+            [
+                "5781ba3916d7388b"
+            ]
+        ]
+    },
+    {
+        "id": "9bc0a8d1c2956d4f",
+        "type": "debug",
+        "z": "7dc4a225aa06a383",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "5781ba3916d7388b",
+        "type": "mqtt out",
+        "z": "7dc4a225aa06a383",
+        "name": "",
+        "topic": "sensbey/calibtest",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 630,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "41d5bf6ebea509a1",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor 3",
+        "label": "温度読調整 3",
+        "group": "1344e9cb1ffc6b70",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "温度読調整",
+                "value": "calibration3",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "calibration3": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 150,
+        "y": 1500,
+        "wires": [
+            [
+                "624d7c48660d3f4b"
+            ]
+        ]
+    },
+    {
+        "id": "624d7c48660d3f4b",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration3\", msg.payload.calibration3);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1500,
+        "wires": [
+            [
+                "5781ba3916d7388b"
+            ]
+        ]
+    },
+    {
+        "id": "40a0d86651ca96c5",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor 4",
+        "label": "温度読調整 4",
+        "group": "2f3cf93878c09d49",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "温度読調整",
+                "value": "calibration4",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "calibration4": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 150,
+        "y": 1540,
+        "wires": [
+            [
+                "0a32ec83e46433cd"
+            ]
+        ]
+    },
+    {
+        "id": "0a32ec83e46433cd",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration4\", msg.payload.calibration4);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1540,
+        "wires": [
+            [
+                "5781ba3916d7388b"
+            ]
+        ]
+    },
+    {
+        "id": "af4a8fb0a9362202",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor 5",
+        "label": "温度読調整 5",
+        "group": "42da17ba8f24bbcb",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "温度読調整",
+                "value": "calibration5",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "calibration5": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 150,
+        "y": 1580,
+        "wires": [
+            [
+                "f05ebef41789bfa4"
+            ]
+        ]
+    },
+    {
+        "id": "f05ebef41789bfa4",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration5\", msg.payload.calibration5);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1580,
+        "wires": [
+            [
+                "5781ba3916d7388b"
+            ]
+        ]
+    },
+    {
+        "id": "4f1db43855b960db",
+        "type": "ui_form",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor 6",
+        "label": "温度読調整 6",
+        "group": "1344e9cb1ffc6b70",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "温度読調整",
+                "value": "calibration6",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "calibration6": ""
+        },
+        "payload": "",
+        "submit": "設定",
+        "cancel": "キャンセル",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": true,
+        "className": "",
+        "x": 150,
+        "y": 1620,
+        "wires": [
+            [
+                "9bb485963ee73378"
+            ]
+        ]
+    },
+    {
+        "id": "9bb485963ee73378",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Calibration Factor",
+        "func": "flow.set(\"calibration6\", msg.payload.calibration6);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1620,
+        "wires": [
+            [
+                "5781ba3916d7388b"
+            ]
+        ]
+    },
+    {
+        "id": "b3f5688767aeaeb7",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn ON Heater 2",
+        "group": "04accf189f335271",
+        "order": 4,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 340,
+        "wires": [
+            [
+                "c1214803f98feb2c"
+            ]
+        ]
+    },
+    {
+        "id": "13abb17f47175971",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn OFF heater 2",
+        "group": "04accf189f335271",
+        "order": 5,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "c1214803f98feb2c"
+            ]
+        ]
+    },
+    {
+        "id": "861529b708ac9742",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn OFF heater 3",
+        "group": "5533b603824c0959",
+        "order": 5,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 460,
+        "wires": [
+            [
+                "c8c20bd91d1f2f99"
+            ]
+        ]
+    },
+    {
+        "id": "3a97f70bf04b6b2c",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn ON Heater 3",
+        "group": "5533b603824c0959",
+        "order": 4,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "c8c20bd91d1f2f99"
+            ]
+        ]
+    },
+    {
+        "id": "f8ab5a8579752862",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn OFF heater 4",
+        "group": "357ad3e381ca0a52",
+        "order": 12,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "7837ad687f3c8d49"
+            ]
+        ]
+    },
+    {
+        "id": "71366c2881ba63f3",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn ON Heater 4",
+        "group": "357ad3e381ca0a52",
+        "order": 11,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "7837ad687f3c8d49"
+            ]
+        ]
+    },
+    {
+        "id": "5724a734f88853c4",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn ON Heater 5",
+        "group": "04accf189f335271",
+        "order": 11,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 580,
+        "wires": [
+            [
+                "d459f65a66dbbdb0"
+            ]
+        ]
+    },
+    {
+        "id": "21a037df56db16b4",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn OFF heater 5",
+        "group": "04accf189f335271",
+        "order": 12,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 620,
+        "wires": [
+            [
+                "d459f65a66dbbdb0"
+            ]
+        ]
+    },
+    {
+        "id": "afa330a14fb982e0",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn OFF heater 6",
+        "group": "5533b603824c0959",
+        "order": 12,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 700,
+        "wires": [
+            [
+                "9ab3783c73c705f6"
+            ]
+        ]
+    },
+    {
+        "id": "d1d698ca591733d8",
+        "type": "ui_button",
+        "z": "7dc4a225aa06a383",
+        "name": "Turn ON Heater 6",
+        "group": "5533b603824c0959",
+        "order": 11,
+        "width": "3",
+        "height": "1",
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "white",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 660,
+        "wires": [
+            [
+                "9ab3783c73c705f6"
+            ]
+        ]
+    },
+    {
+        "id": "fe611189b37a0d49",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "357ad3e381ca0a52",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "name": "Stat Heater 1",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 530,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "b0fe227038c15b52",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "04accf189f335271",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "name": "Stat Heater 2",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 530,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e283c9aa4317fd23",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "5533b603824c0959",
+        "order": 6,
+        "width": "6",
+        "height": "1",
+        "name": "Stat Heater 3",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 530,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "b38d6d5e82a0d04e",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "357ad3e381ca0a52",
+        "order": 13,
+        "width": "6",
+        "height": "1",
+        "name": "Stat Heater 4",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 530,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "684f7be174ead2d0",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "04accf189f335271",
+        "order": 13,
+        "width": "6",
+        "height": "1",
+        "name": "Stat Heater 5",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 510,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "4f20cb6d711fd8cc",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "5533b603824c0959",
+        "order": 13,
+        "width": "6",
+        "height": "1",
+        "name": "Stat Heater 6",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 510,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "887e26f7a7895096",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Config St1",
+        "func": "flow.set(\"st1Min\", msg.payload.minTemp1);\nflow.set(\"st1Max\", msg.payload.maxTemp1);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8224c0770f86d85c",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Config St2",
+        "func": "flow.set(\"st2Min\", msg.payload.minTemp2);\nflow.set(\"st2Max\", msg.payload.maxTemp2);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6e18814e1dcd0158",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Config St3",
+        "func": "flow.set(\"st3Min\", msg.payload.minTemp3);\nflow.set(\"st3Max\", msg.payload.maxTemp3);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "11e429139bdf090e",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Config St4",
+        "func": "flow.set(\"st4Min\", msg.payload.minTemp4);\nflow.set(\"st4Max\", msg.payload.maxTemp4);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d187bcb569e0b384",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Config St5",
+        "func": "flow.set(\"st5Min\", msg.payload.minTemp5);\nflow.set(\"st5Max\", msg.payload.maxTemp5);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "338a338532fbf961",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Config St6",
+        "func": "flow.set(\"st6Min\", msg.payload.minTemp6);\nflow.set(\"st6Max\", msg.payload.maxTemp6);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "51495385494f9605",
+        "type": "inject",
+        "z": "7dc4a225aa06a383",
+        "d": true,
+        "name": "Loop 10s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 810,
+        "y": 40,
+        "wires": [
+            [
+                "24c24031b1863878"
+            ]
+        ]
+    },
+    {
+        "id": "24c24031b1863878",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "d": true,
+        "name": "Monitor State - Digital Temp Control",
+        "func": "if (flow.get(\"st1Stat\") == \"ON\" || flow.get(\"st2Stat\") == \"ON\" ||\n    flow.get(\"st3Stat\") == \"ON\" || flow.get(\"st4Stat\") == \"ON\" ||\n    flow.get(\"st5Stat\") == \"ON\" || flow.get(\"st6Stat\") == \"ON\" ){\n    // msg.payload = \"NYALA WOI\"\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/digitalTempControl\"\n\n    return msg;\n} else {\n    // msg.payload = \"MATI WOOIOIOOIO\";\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/digitalTempControl\";\n    return msg\n    }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 60,
+        "wires": [
+            [
+                "dd5507576a9aa775"
+            ]
+        ]
+    },
+    {
+        "id": "50f4988a3006dc45",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Monitor State - Digital Temp Control 1",
+        "func": "if (flow.get(\"st1Stat\") == \"ON\"){\n    // msg.payload = \"NYALA WOI\"\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/digitalTempControl1\"\n\n    return msg;\n} else {\n    // msg.payload = \"MATI WOOIOIOOIO\";\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/digitalTempControl1\";\n    return msg\n    }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 460,
+        "wires": [
+            [
+                "85614d1581c6ceba"
+            ]
+        ]
+    },
+    {
+        "id": "ba3b2cb8a28f8f01",
+        "type": "inject",
+        "z": "7dc4a225aa06a383",
+        "name": "Loop 10s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 810,
+        "y": 460,
+        "wires": [
+            [
+                "50f4988a3006dc45",
+                "6d57d74769bfa40c",
+                "d759c893aa532851",
+                "ca51ee44edb49c1b",
+                "af384ab56e07e00d",
+                "6d486ce159025995"
+            ]
+        ]
+    },
+    {
+        "id": "6d57d74769bfa40c",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Monitor State - Digital Temp Control 2",
+        "func": "if (flow.get(\"st2Stat\") == \"ON\"){\n    // msg.payload = \"NYALA WOI\"\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/digitalTempControl2\"\n\n    return msg;\n} else {\n    // msg.payload = \"MATI WOOIOIOOIO\";\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/digitalTempControl2\";\n    return msg\n    }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 500,
+        "wires": [
+            [
+                "85614d1581c6ceba"
+            ]
+        ]
+    },
+    {
+        "id": "d759c893aa532851",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Monitor State - Digital Temp Control 3",
+        "func": "if (flow.get(\"st3Stat\") == \"ON\"){\n    // msg.payload = \"NYALA WOI\"\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/digitalTempControl3\"\n\n    return msg;\n} else {\n    // msg.payload = \"MATI WOOIOIOOIO\";\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/digitalTempControl3\";\n    return msg\n    }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 540,
+        "wires": [
+            [
+                "85614d1581c6ceba"
+            ]
+        ]
+    },
+    {
+        "id": "ca51ee44edb49c1b",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Monitor State - Digital Temp Control 4",
+        "func": "if (flow.get(\"st4Stat\") == \"ON\"){\n    // msg.payload = \"NYALA WOI\"\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/digitalTempControl4\"\n\n    return msg;\n} else {\n    // msg.payload = \"MATI WOOIOIOOIO\";\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/digitalTempControl4\";\n    return msg\n    }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 580,
+        "wires": [
+            [
+                "85614d1581c6ceba"
+            ]
+        ]
+    },
+    {
+        "id": "af384ab56e07e00d",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Monitor State - Digital Temp Control 5",
+        "func": "if (flow.get(\"st5Stat\") == \"ON\"){\n    // msg.payload = \"NYALA WOI\"\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/digitalTempControl5\"\n\n    return msg;\n} else {\n    // msg.payload = \"MATI WOOIOIOOIO\";\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/digitalTempControl5\";\n    return msg\n    }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 620,
+        "wires": [
+            [
+                "85614d1581c6ceba"
+            ]
+        ]
+    },
+    {
+        "id": "6d486ce159025995",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Monitor State - Digital Temp Control 6",
+        "func": "if (flow.get(\"st6Stat\") == \"ON\"){\n    // msg.payload = \"NYALA WOI\"\n    msg.payload = \"OFF\"\n    msg.topic = \"sensbey/digitalTempControl6\"\n\n    return msg;\n} else {\n    // msg.payload = \"MATI WOOIOIOOIO\";\n    msg.payload = \"ON\"\n    msg.topic = \"sensbey/digitalTempControl6\";\n    return msg\n    }",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 660,
+        "wires": [
+            [
+                "85614d1581c6ceba"
+            ]
+        ]
+    },
+    {
+        "id": "85614d1581c6ceba",
+        "type": "mqtt out",
+        "z": "7dc4a225aa06a383",
+        "name": "Machine Command",
+        "topic": "",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f529cf8a2175817",
+        "x": 1350,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "d12391dbfa2fa0cd",
+        "type": "mysql",
+        "z": "7dc4a225aa06a383",
+        "mydb": "20ce7e720d3a27f2",
+        "name": "",
+        "x": 1350,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ef605f4e9194549f",
+        "type": "mysql",
+        "z": "7dc4a225aa06a383",
+        "mydb": "20ce7e720d3a27f2",
+        "name": "",
+        "x": 630,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eff004aa2698b8b1",
+        "type": "delay",
+        "z": "7dc4a225aa06a383",
+        "name": "GAJADI Delete Later",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "30",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 500,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bf5293d7e47e139e",
+        "type": "comment",
+        "z": "7dc4a225aa06a383",
+        "name": "Test Dashboard",
+        "info": "",
+        "x": 180,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "0e396c45a8aaf678",
+        "type": "mqtt in",
+        "z": "7dc4a225aa06a383",
+        "name": "",
+        "topic": "sensbey/temperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "9f529cf8a2175817",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1800,
+        "wires": [
+            [
+                "67cf0b4411efd701",
+                "28bcd3e59325693f",
+                "d01408895af4db4a",
+                "a421e0ed1b8735e5",
+                "61a848732b23eaf8",
+                "a0c837db4960470b",
+                "0dc38e37e7494795",
+                "3b23d94e77e6c43c",
+                "fd42ea4a542346b0"
+            ]
+        ]
+    },
+    {
+        "id": "3b23d94e77e6c43c",
+        "type": "debug",
+        "z": "7dc4a225aa06a383",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "67cf0b4411efd701",
+        "type": "ui_gauge",
+        "z": "7dc4a225aa06a383",
+        "name": "Heater 1",
+        "group": "a215049370c6539c",
+        "order": 1,
+        "width": "3",
+        "height": "2",
+        "gtype": "gage",
+        "title": "ヒーター 1",
+        "label": "",
+        "format": "{{msg.payload[0].temp1}} °C",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 360,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "28bcd3e59325693f",
+        "type": "ui_gauge",
+        "z": "7dc4a225aa06a383",
+        "name": "Heater 2",
+        "group": "a215049370c6539c",
+        "order": 2,
+        "width": "3",
+        "height": "2",
+        "gtype": "gage",
+        "title": "ヒーター 2",
+        "label": "Celcius",
+        "format": "{{msg.payload[1].temp2}} °C",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 360,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "d01408895af4db4a",
+        "type": "ui_gauge",
+        "z": "7dc4a225aa06a383",
+        "name": "Heater 3",
+        "group": "a215049370c6539c",
+        "order": 3,
+        "width": "3",
+        "height": "2",
+        "gtype": "gage",
+        "title": "ヒーター 3",
+        "label": "Celcius",
+        "format": "{{msg.payload[2].temp3}} °C",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 360,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "a421e0ed1b8735e5",
+        "type": "ui_gauge",
+        "z": "7dc4a225aa06a383",
+        "name": "Heater 4",
+        "group": "a215049370c6539c",
+        "order": 4,
+        "width": "3",
+        "height": "2",
+        "gtype": "gage",
+        "title": "ヒーター 4",
+        "label": "Celcius",
+        "format": "{{msg.payload[3].temp4}} °C",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 360,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "61a848732b23eaf8",
+        "type": "ui_gauge",
+        "z": "7dc4a225aa06a383",
+        "name": "Heater 5",
+        "group": "a215049370c6539c",
+        "order": 5,
+        "width": "3",
+        "height": "2",
+        "gtype": "gage",
+        "title": "ヒーター 5",
+        "label": "Celcius",
+        "format": "{{msg.payload[4].temp5}} °C",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 360,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "a0c837db4960470b",
+        "type": "ui_gauge",
+        "z": "7dc4a225aa06a383",
+        "name": "Heater 6",
+        "group": "a215049370c6539c",
+        "order": 6,
+        "width": "3",
+        "height": "2",
+        "gtype": "gage",
+        "title": "ヒーター 6",
+        "label": "Celcius",
+        "format": "{{msg.payload[5].temp6}} °C",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 360,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "0dc38e37e7494795",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Configs",
+        "func": "let st1 = flow.get(\"st1\")\nlet st2 = flow.get(\"st2\")\nlet st3 = flow.get(\"st3\")\nlet st4 = flow.get(\"st4\")\nlet st5 = flow.get(\"st5\")\nlet st6 = flow.get(\"st6\")\nlet calibration1 = flow.get(\"calibration1\")\nlet calibration2 = flow.get(\"calibration2\")\nlet calibration3 = flow.get(\"calibration3\")\nlet calibration4 = flow.get(\"calibration4\")\nlet calibration5 = flow.get(\"calibration5\")\nlet calibration6 = flow.get(\"calibration6\")\nlet st1min = flow.get(\"st1Min\")\nlet st2min = flow.get(\"st2Min\")\nlet st3min = flow.get(\"st3Min\")\nlet st4min = flow.get(\"st4Min\")\nlet st5min = flow.get(\"st5Min\")\nlet st6min = flow.get(\"st6Min\")\nlet st1max = flow.get(\"st1Max\")\nlet st2max = flow.get(\"st2Max\")\nlet st3max = flow.get(\"st3Max\")\nlet st4max = flow.get(\"st4Max\")\nlet st5max = flow.get(\"st5Max\")\nlet st6max = flow.get(\"st6Max\")\nmsg.payload = {\"st1\":st1,\"st2\":st2,\"st3\":st3,\"st4\":st4,\"st5\":st5,\"st6\":st6,\n\"st1min\":st1min,\"st2min\":st2min,\"st3min\":st3min,\"st4min\":st4min,\"st5min\":st5min,\"st6min\":st6min,\n\"st1max\": st1max, \"st2max\": st2max, \"st3max\": st3max, \"st4max\": st4max, \"st5max\": st5max, \"st6max\": st6max,\n\"calibration1\": calibration1, \"calibration2\": calibration2, \"calibration3\": calibration3, \"calibration4\": calibration4, \"calibration5\": calibration5, \"calibration6\": calibration6,}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 2040,
+        "wires": [
+            [
+                "8632215a26794522",
+                "cd4376f0c4c0e535",
+                "0e72bab3c7d8b180",
+                "7b32538fd8013955",
+                "2048465ee84434cd",
+                "e8f236bede10e2c3",
+                "9641fc738267f7b0",
+                "e42e3a2117e2f90c",
+                "aa6898036e21a7f0",
+                "0b9a039e0dd3467e",
+                "3c7458efe944fa9b",
+                "701e07f2a8bfda49",
+                "73e8629443af35c1",
+                "a4a9946ad86c0564",
+                "04442ab86a480ce5",
+                "dc4aba9381eb911e",
+                "89c1e7726cc1895c",
+                "19c8b45d9791a370"
+            ]
+        ]
+    },
+    {
+        "id": "90a7c3742123c61b",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "afdaee7ed6f757ce",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 1 stat",
+        "label": "ヒーター 1",
+        "format": "{{msg.payload.st1}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 470,
+        "y": 2100,
+        "wires": []
+    },
+    {
+        "id": "2ebd5e38d9809536",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "afdaee7ed6f757ce",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 2 stat",
+        "label": "ヒーター 2",
+        "format": "{{msg.payload.st2}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 470,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "90fff4b61edb6105",
+        "type": "ui_template",
+        "z": "7dc4a225aa06a383",
+        "group": "357ad3e381ca0a52",
+        "name": "Custom CSS",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    /*\nIt is reasnoble to declare the colors as CSS variables\nso they can be easily called by name where needed.\n\nYou can see that in many places the variables are not used. Change it!\n*/\n\n    :root {\n        --color-green-primary: rgb(51, 204, 51);\n        --color-green-secondary: rgb(26, 101, 26);\n        --color-red-primary: rgb(255, 0, 0);\n        --color-red-secondary: rgba(153, 0, 0, 1);\n        --color-gray-primary: rgba(40, 40, 40, 1);\n        --color-gray-secondary: rgba(65, 65, 65, 1);\n        --color-text-primary: rgb(230, 226, 209);\n        --color-widget-border: rgb(84, 78, 78);\n    }\n\n    /*\nAll CSS adjustments are commented out.\nTurn rules on one by one and see the changes.\nDon't use too many elements cos it wil be confusing\nStart with simple elements like text, slider or button\n\nMany of elements like buttons have states, \nthose rules must be found and adjusted also.\n*/\n\n    /*\n.masonry-container {\n    position: relative;\n    width: 100%;\n    height:100%;\n    margin: 0 auto;\n    background: rgb(255,0,0);\n    background: linear-gradient(180deg,  var(--color-gray-primary) 0%, var(--color-gray-secondary) 100%);\n}\n*/\n    /*\n    .masonry-container-test {\n        position: relative;\n        width: 100%;\n        height: 100%;\n        margin: 0 auto;\n        background: rgb(255, 0, 0);\n        background: linear-gradient(180deg, var(--color-gray-primary) 0%, var(--color-gray-secondary) 100%);\n    }\n*/\n    /*\n.nr-dashboard-cardcontainer {\n    position: relative;\n    box-shadow: inset 0px 1px 4px 0px #000000bb;\n    border-radius: 15px;\n}\n*/\n\n    /*\n.nr-dashboard-theme ui-card-panel {\n    background-color: #33333300;\n    color:var(--color-text-primary);\n    border-radius: 15px;\n    box-shadow: 0 0 8px 0px #00000080;\n}\n*/\n\n\n    .custom-text-box-off {\n        background-color: #EC3D18;\n        //font-size: 40px;\n        color: #ffff;\n        //color: var(--color-text-primary);\n        //text-shadow: 4px 2px 4px #00000045;\n        box-shadow: 0 -1px 5px 1px #00000045;\n        border-radius: 12px;\n        border: 1px solid var(--color-widget-border);\n    }\n\n    .custom-text-box-on {\n        background-color: #33C638;\n        color: #ffff;\n        //color: var(--color-text-primary);\n        //text-shadow: 4px 2px 4px #00000045;\n        box-shadow: 0 -1px 5px 1px #00000045;\n        border-radius: 12px;\n        border: 1px solid var(--color-widget-border);\n    }\n\n    .tb-highlimit {\n    background-color: rgb(255, 152, 48);\n    //background-image: linear-gradient(45deg, rgb(255, 152, 48), rgba(255,0,0,1));\n    color: #ffff;\n    //color: var(--color-text-primary);\n    //text-shadow: 4px 2px 4px #00000045;\n    box-shadow: 0 -1px 5px 1px #00000045;\n    border-radius: 12px;\n    border: 1px solid var(--color-widget-border);\n    }\n    .tb-lowlimit {\n    background-color: rgb(115, 191, 105);\n    //background-image: linear-gradient(72deg, rgb(115, 191, 105), rgba(24,219,29,1));\n    color: #ffff;\n    //color: var(--color-text-primary);\n    //text-shadow: 4px 2px 4px #00000045;\n    box-shadow: 0 -1px 5px 1px #00000045;\n    border-radius: 12px;\n    border: 1px solid var(--color-widget-border);\n    }\n\n\n    /*\n.nr-dashboard-theme ui-card-panel p.nr-dashboard-cardtitle {\n    color: var(--color-text-primary);\n}\n*/\n\n\n    /*\n.md-button {\n    display: inline-block;\n    position: relative;\n    cursor: pointer;\n    min-height: 36px;\n    min-width: 88px;\n    line-height: 36px;\n    vertical-align: middle;\n    align-items: center;\n    text-align: center;\n    border-radius: 12px;\n    box-sizing: border-box;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n    outline: none;\n    border: 0;\n    padding: 0 6px;\n    margin: 6px 8px;\n    background: transparent;\n    color:var(--color-text-primary);\n    white-space: nowrap;\n    text-transform: uppercase;\n    font-weight: 500;\n    font-size: 14px;\n    font-style: inherit;\n    font-variant: inherit;\n    font-family: inherit;\n    text-decoration: none;\n    overflow: hidden;\n    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);\n}\n\n*/\n\n    /*\n.nr-dashboard-theme .nr-dashboard-button .md-button {\n    background-color: #88888800;\n    color:var(--color-text-primary);\n}\n*/\n\n    /*\n.nr-dashboard-theme .nr-dashboard-button .md-button:hover {\n    background-color: #88888855;\n}\n*/\n\n\n    /*\nmd-slider .md-thumb {\n    z-index: 1;\n    position: absolute;\n    left: -10px;\n    top: 14px;\n    width: 20px;\n    height: 20px;\n    border-radius: 20px;\n    -webkit-transform: scale(.7);\n    transform: scale(.7);\n    transition: all .4s cubic-bezier(.25,.8,.25,1);\n    box-shadow: 0 0 6px #00000070;\n}\n\n*/\n\n    /*\nAdvanced stuff - dynamic change of card CSS\n\nClasses here can be used to make colored stripe at the top of card\nUsage is not in here, but they are added to md-card when needed within another template\n\n.carderr {\n    background: rgb(255,0,0);\n    background: linear-gradient(180deg, var(--color-red-primary) 0px, var(--color-red-secondary) 3px, rgba(80,80,80,1) 4px, rgba(45,45,45,1) 100%);\n}\n.cardok {\n    background: rgb(39,255,0);\n    background: linear-gradient(180deg, var(--color-green-primary) 0px, var(--color-green-secondary) 3px, rgba(70,70,70,1) 4px, rgba(40,40,40,1) 100%);\n}\n*/\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 110,
+        "y": 2180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8632215a26794522",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Check Status",
+        "func": "if (msg.payload.st1==\"ON\"){\n    msg.className = \"custom-text-box-on\"\n    return msg\n} else if (msg.payload.st1 == \"OFF\"){\n    msg.className = \"custom-text-box-off\"\n    return msg\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 2100,
+        "wires": [
+            [
+                "90a7c3742123c61b"
+            ]
+        ]
+    },
+    {
+        "id": "cd4376f0c4c0e535",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Check Status",
+        "func": "if (msg.payload.st2==\"ON\"){\n    msg.className = \"custom-text-box-on\"\n    return msg\n} else if (msg.payload.st2 == \"OFF\"){\n    msg.className = \"custom-text-box-off\"\n    return msg\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 2140,
+        "wires": [
+            [
+                "2ebd5e38d9809536"
+            ]
+        ]
+    },
+    {
+        "id": "0e72bab3c7d8b180",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Check Status",
+        "func": "if (msg.payload.st3==\"ON\"){\n    msg.className = \"custom-text-box-on\"\n    return msg\n} else if (msg.payload.st3 == \"OFF\"){\n    msg.className = \"custom-text-box-off\"\n    return msg\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 2180,
+        "wires": [
+            [
+                "fa1c550acb9dd823"
+            ]
+        ]
+    },
+    {
+        "id": "fa1c550acb9dd823",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "afdaee7ed6f757ce",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 3 stat",
+        "label": "ヒーター 3",
+        "format": "{{msg.payload.st3}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 470,
+        "y": 2180,
+        "wires": []
+    },
+    {
+        "id": "7b32538fd8013955",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Check Status",
+        "func": "if (msg.payload.st4==\"ON\"){\n    msg.className = \"custom-text-box-on\"\n    return msg\n} else if (msg.payload.st4 == \"OFF\"){\n    msg.className = \"custom-text-box-off\"\n    return msg\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 2220,
+        "wires": [
+            [
+                "9014be672e244c94"
+            ]
+        ]
+    },
+    {
+        "id": "9014be672e244c94",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "afdaee7ed6f757ce",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 4 stat",
+        "label": "ヒーター 4",
+        "format": "{{msg.payload.st4}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 470,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "2048465ee84434cd",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Check Status",
+        "func": "if (msg.payload.st5==\"ON\"){\n    msg.className = \"custom-text-box-on\"\n    return msg\n} else if (msg.payload.st5 == \"OFF\"){\n    msg.className = \"custom-text-box-off\"\n    return msg\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 2260,
+        "wires": [
+            [
+                "0dcbf747118bcc9d"
+            ]
+        ]
+    },
+    {
+        "id": "0dcbf747118bcc9d",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "afdaee7ed6f757ce",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 5 stat",
+        "label": "ヒーター 5",
+        "format": "{{msg.payload.st5}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 470,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "e8f236bede10e2c3",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "name": "Check Status",
+        "func": "if (msg.payload.st6==\"ON\"){\n    msg.className = \"custom-text-box-on\"\n    return msg\n} else if (msg.payload.st6 == \"OFF\"){\n    msg.className = \"custom-text-box-off\"\n    return msg\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 2300,
+        "wires": [
+            [
+                "697fc1ee6d841b0f"
+            ]
+        ]
+    },
+    {
+        "id": "697fc1ee6d841b0f",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "afdaee7ed6f757ce",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 6 stat",
+        "label": "ヒーター 6",
+        "format": "{{msg.payload.st6}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 470,
+        "y": 2300,
+        "wires": []
+    },
+    {
+        "id": "9641fc738267f7b0",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "879ee6f9db7948fc",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 1 High Limit",
+        "label": "ヒーター 1",
+        "format": "{{msg.payload.st1max}} °C",
+        "layout": "col-center",
+        "className": "tb-highlimit",
+        "x": 330,
+        "y": 2360,
+        "wires": []
+    },
+    {
+        "id": "e42e3a2117e2f90c",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "879ee6f9db7948fc",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 2 High Limit",
+        "label": "ヒーター 2",
+        "format": "{{msg.payload.st2max}} °C",
+        "layout": "col-center",
+        "className": "tb-highlimit",
+        "x": 330,
+        "y": 2400,
+        "wires": []
+    },
+    {
+        "id": "aa6898036e21a7f0",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "879ee6f9db7948fc",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 3 High Limit",
+        "label": "ヒーター 3",
+        "format": "{{msg.payload.st3max}} °C",
+        "layout": "col-center",
+        "className": "tb-highlimit",
+        "x": 330,
+        "y": 2440,
+        "wires": []
+    },
+    {
+        "id": "0b9a039e0dd3467e",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "879ee6f9db7948fc",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 4 High Limit",
+        "label": "ヒーター 4",
+        "format": "{{msg.payload.st4max}} °C",
+        "layout": "col-center",
+        "className": "tb-highlimit",
+        "x": 330,
+        "y": 2480,
+        "wires": []
+    },
+    {
+        "id": "3c7458efe944fa9b",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "879ee6f9db7948fc",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 5 High Limit",
+        "label": "ヒーター 5",
+        "format": "{{msg.payload.st5max}} °C",
+        "layout": "col-center",
+        "className": "tb-highlimit",
+        "x": 330,
+        "y": 2520,
+        "wires": []
+    },
+    {
+        "id": "701e07f2a8bfda49",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "879ee6f9db7948fc",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 6 High Limit",
+        "label": "ヒーター 6",
+        "format": "{{msg.payload.st6max}} °C",
+        "layout": "col-center",
+        "className": "tb-highlimit",
+        "x": 330,
+        "y": 2560,
+        "wires": []
+    },
+    {
+        "id": "73e8629443af35c1",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "7aea89e42b66ad92",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 1 lowLimit",
+        "label": "ヒーター 1",
+        "format": "{{msg.payload.st1min}} °C",
+        "layout": "col-center",
+        "className": "tb-lowlimit",
+        "x": 330,
+        "y": 2620,
+        "wires": []
+    },
+    {
+        "id": "a4a9946ad86c0564",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "7aea89e42b66ad92",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 2 lowLimit",
+        "label": "ヒーター 2",
+        "format": "{{msg.payload.st2min}} °C",
+        "layout": "col-center",
+        "className": "tb-lowlimit",
+        "x": 330,
+        "y": 2660,
+        "wires": []
+    },
+    {
+        "id": "04442ab86a480ce5",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "7aea89e42b66ad92",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 3 lowLimit",
+        "label": "ヒーター 3",
+        "format": "{{msg.payload.st3min}} °C",
+        "layout": "col-center",
+        "className": "tb-lowlimit",
+        "x": 330,
+        "y": 2700,
+        "wires": []
+    },
+    {
+        "id": "dc4aba9381eb911e",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "7aea89e42b66ad92",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 4 lowLimit",
+        "label": "ヒーター 4",
+        "format": "{{msg.payload.st4min}} °C",
+        "layout": "col-center",
+        "className": "tb-lowlimit",
+        "x": 330,
+        "y": 2740,
+        "wires": []
+    },
+    {
+        "id": "89c1e7726cc1895c",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "7aea89e42b66ad92",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 5 lowLimit",
+        "label": "ヒーター 5",
+        "format": "{{msg.payload.st5max}} °C",
+        "layout": "col-center",
+        "className": "tb-lowlimit",
+        "x": 330,
+        "y": 2780,
+        "wires": []
+    },
+    {
+        "id": "19c8b45d9791a370",
+        "type": "ui_text",
+        "z": "7dc4a225aa06a383",
+        "group": "7aea89e42b66ad92",
+        "order": 7,
+        "width": "3",
+        "height": "1",
+        "name": "Heater 6 lowLimit",
+        "label": "ヒーター 6",
+        "format": "{{msg.payload.st6max}} °C",
+        "layout": "col-center",
+        "className": "tb-lowlimit",
+        "x": 330,
+        "y": 2820,
+        "wires": []
+    },
+    {
+        "id": "fd42ea4a542346b0",
+        "type": "function",
+        "z": "7dc4a225aa06a383",
+        "d": true,
+        "name": "Test Chart",
+        "func": "let temp1 = msg.payload[0].temp1\nlet temp2 = msg.payload[1].temp2\nlet temp3 = msg.payload[2].temp3\nlet temp4 = msg.payload[3].temp4\nlet temp5 = msg.payload[4].temp5\nlet temp6 = msg.payload[5].temp6\n\nvar msg2 = {}\nmsg.payload = temp1 \nmsg.topic =\"ヒーター 1\"\n\nmsg2.payload = temp2\nmsg2.topic = \"ヒーター 2\"\n\nreturn [msg,msg2];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1740,
+        "wires": [
+            [
+                "66fba0159da3d885"
+            ],
+            [
+                "66fba0159da3d885"
+            ]
+        ]
+    },
+    {
+        "id": "66fba0159da3d885",
+        "type": "ui_chart",
+        "z": "7dc4a225aa06a383",
+        "d": true,
+        "name": "",
+        "group": "7aea89e42b66ad92",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "label": "Tewst Chart",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 650,
+        "y": 1700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a85a219918a3937",
+        "type": "ui_spacer",
+        "z": "7dc4a225aa06a383",
+        "name": "spacer",
+        "group": "357ad3e381ca0a52",
+        "order": 7,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "da2689174b548321",
+        "type": "ui_spacer",
+        "z": "7dc4a225aa06a383",
+        "name": "spacer",
+        "group": "04accf189f335271",
+        "order": 7,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "93a0c5183e3eed91",
+        "type": "ui_spacer",
+        "z": "7dc4a225aa06a383",
+        "name": "spacer",
+        "group": "5533b603824c0959",
+        "order": 7,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "9f529cf8a2175817",
+        "type": "mqtt-broker",
+        "name": "Test Broker",
+        "broker": "192.168.11.124",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "5533b603824c0959",
+        "type": "ui_group",
+        "name": "Group 3",
+        "tab": "da58e239018d3645",
+        "order": 3,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "04accf189f335271",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "da58e239018d3645",
+        "order": 2,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "357ad3e381ca0a52",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "da58e239018d3645",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4e9ce00bc81d3815",
+        "type": "ui_group",
+        "name": "Group 4",
+        "tab": "da58e239018d3645",
+        "order": 4,
+        "disp": false,
+        "width": "18",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2f3cf93878c09d49",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "875898a507f5fa38",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "da01e2b69ce1f8e9",
+        "type": "ui_group",
+        "name": "Group 4",
+        "tab": "875898a507f5fa38",
+        "order": 4,
+        "disp": false,
+        "width": "18",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "42da17ba8f24bbcb",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "875898a507f5fa38",
+        "order": 2,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1344e9cb1ffc6b70",
+        "type": "ui_group",
+        "name": "Group 3",
+        "tab": "875898a507f5fa38",
+        "order": 3,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "20ce7e720d3a27f2",
+        "type": "MySQLdatabase",
+        "name": "Sensbey_TempLog",
+        "host": "192.168.11.124",
+        "port": "3306",
+        "db": "sensbey",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "a215049370c6539c",
+        "type": "ui_group",
+        "name": "ヒーター温度",
+        "tab": "1a64bd0f1256efe8",
+        "order": 1,
+        "disp": true,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "afdaee7ed6f757ce",
+        "type": "ui_group",
+        "name": "ヒーターステータス",
+        "tab": "1a64bd0f1256efe8",
+        "order": 2,
+        "disp": true,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "879ee6f9db7948fc",
+        "type": "ui_group",
+        "name": "設定温度以上",
+        "tab": "1a64bd0f1256efe8",
+        "order": 3,
+        "disp": true,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7aea89e42b66ad92",
+        "type": "ui_group",
+        "name": "設定温度以下",
+        "tab": "1a64bd0f1256efe8",
+        "order": 4,
+        "disp": true,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "da58e239018d3645",
+        "type": "ui_tab",
+        "name": "パネル",
+        "icon": "fa-cogs",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "875898a507f5fa38",
+        "type": "ui_tab",
+        "name": "調整",
+        "icon": "settings",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "1a64bd0f1256efe8",
+        "type": "ui_tab",
+        "name": "ダッシュボード",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
