@@ -41,11 +41,16 @@ void setup()
     for (uint8_t i = 0; i <= 6; i++)
     {
         pinMode(HeaterPin[i], OUTPUT);
-    }
-    for (uint8_t i = 0; i <= 6; i++)
-    {
+        digitalWrite(HeaterPin[i], LOW);
+        
         pinMode(TempControlPin[i], OUTPUT);
+        digitalWrite(TempControlPin[i], LOW);
     }
+//    for (uint8_t i = 0; i <= 6; i++)
+//    {
+//        pinMode(TempControlPin[i], OUTPUT);
+//        digitalWrite(HeaterPin[0], LOW);
+//    }
     delay(500);
 }
 
@@ -240,6 +245,13 @@ void reconnect()
             client.subscribe("sensbey/st4");
             client.subscribe("sensbey/st5");
             client.subscribe("sensbey/st6");
+            
+            client.subscribe("sensbey/digitalTempControl1");
+            client.subscribe("sensbey/digitalTempControl2");
+            client.subscribe("sensbey/digitalTempControl3");
+            client.subscribe("sensbey/digitalTempControl4");
+            client.subscribe("sensbey/digitalTempControl5");
+            client.subscribe("sensbey/digitalTempControl6");
         }
         else
         {

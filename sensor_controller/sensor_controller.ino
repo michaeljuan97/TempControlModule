@@ -7,8 +7,8 @@
 #include <SPI.h>
 
 //WIFI Config
-const char *ssid = "Wifi Go Pew Pewz";
-const char *password = "randomword123!";
+const char *ssid = "LT 1C";
+const char *password = "kost3";
 
 // Set your Static IP address
 // IPAddress staticIP(192, 168, 11, 132);
@@ -158,12 +158,12 @@ void reconnect()
         {
             Serial.println("connected");
             // Subscribe
-            client.subscribe("sensbey/st1");
-            client.subscribe("sensbey/st2");
-            client.subscribe("sensbey/st3");
-            client.subscribe("sensbey/st4");
-            client.subscribe("sensbey/st5");
-            client.subscribe("sensbey/st6");
+//            client.subscribe("sensbey/st1");
+//            client.subscribe("sensbey/st2");
+//            client.subscribe("sensbey/st3");
+//            client.subscribe("sensbey/st4");
+//            client.subscribe("sensbey/st5");
+//            client.subscribe("sensbey/st6");
             client.subscribe("sensbey/calibtest");
         }
         else
