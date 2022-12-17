@@ -4,8 +4,8 @@
 #include <PubSubClient.h>
 
 //WIFI Config
-const char *ssid = "Wifi Go Pew Pewz";
-const char *password = "randomword123!";
+const char *ssid = "LT 1C";
+const char *password = "kost3";
 
 // Set your Static IP address
 // IPAddress staticIP(192, 168, 11, 132);
@@ -41,10 +41,10 @@ void setup()
     for (uint8_t i = 0; i <= 6; i++)
     {
         pinMode(HeaterPin[i], OUTPUT);
-        digitalWrite(HeaterPin[i], HIGH);
+//        digitalWrite(HeaterPin[i], HIGH);
         
         pinMode(TempControlPin[i], OUTPUT);
-        digitalWrite(TempControlPin[i], HIGH);
+//        digitalWrite(TempControlPin[i], HIGH);
     }
 //    for (uint8_t i = 0; i <= 6; i++)
 //    {
@@ -96,6 +96,7 @@ void callback(char *topic, byte *message, unsigned int length)
         if (messageTemp == "ON")
         {
             digitalWrite(HeaterPin[0], LOW);
+            Serial.print("Nyala 1");
         }
         else if (messageTemp == "OFF")
         {
@@ -107,6 +108,7 @@ void callback(char *topic, byte *message, unsigned int length)
         if (messageTemp == "ON")
         {
             digitalWrite(HeaterPin[1], LOW);
+            Serial.print("Nyala 2");
         }
         else if (messageTemp == "OFF")
         {
@@ -118,6 +120,7 @@ void callback(char *topic, byte *message, unsigned int length)
         if (messageTemp == "ON")
         {
             digitalWrite(HeaterPin[2], LOW);
+            Serial.print("Nyala 3");
         }
         else if (messageTemp == "OFF")
         {
@@ -129,6 +132,7 @@ void callback(char *topic, byte *message, unsigned int length)
         if (messageTemp == "ON")
         {
             digitalWrite(HeaterPin[3], LOW);
+            Serial.print("Nyala 4");
         }
         else if (messageTemp == "OFF")
         {
@@ -140,6 +144,7 @@ void callback(char *topic, byte *message, unsigned int length)
         if (messageTemp == "ON")
         {
             digitalWrite(HeaterPin[4], LOW);
+            Serial.print("Nyala 5");
         }
         else if (messageTemp == "OFF")
         {
@@ -151,6 +156,7 @@ void callback(char *topic, byte *message, unsigned int length)
         if (messageTemp == "ON")
         {
             digitalWrite(HeaterPin[5], LOW);
+            Serial.print("Nyala 6");
         }
         else if (messageTemp == "OFF")
         {
